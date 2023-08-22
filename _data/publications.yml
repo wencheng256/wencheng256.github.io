@@ -6,7 +6,7 @@ main:
     conference: IEEE/CVF International Conference on Computer Vision <strong>(ICCV)</strong>, 2023.
     pdf: https://arxiv.org/pdf/2308.05605
     code: https://github.com/wencheng256/DaCCN
-    image: ./assets/img/DaCCM.png
+    image: ./assets/img/DaCCN.png
 
   - title: "Weakly Supervised Monocular 3D Object Detection using Multi-View Projection and Direction Consistency"
     authors: Runzhou Tao*, <strong>Wencheng Han* (co-first author)</strong>,  Zhongying Qiu, Cheng-zhong Xu, Jianbing Shen
