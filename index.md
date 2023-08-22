@@ -21,10 +21,10 @@ Thank you for stopping by. I am always open to collaboration, discussions, or si
 
 ## News
 
-- **[July. 2023]** Our paper accepted to ICCV 2023.
+- **[July. 2023]** One paper accepted to ICCV 2023.
 - **[Mar. 2023]** Two paper accepted to CVPR 2023
-- **[June. 2022]** Our paper accepted to ECCV2022.
-- **[Mar. 2020]** Our paper accepted to CVPR 2021.
+- **[June. 2022]** One paper accepted to ECCV2022.
+- **[Mar. 2020]** One paper accepted to CVPR 2021.
 
 {% include_relative _includes/publications.md %}
 
