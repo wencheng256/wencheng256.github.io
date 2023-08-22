@@ -16,7 +16,7 @@ Thank you for stopping by. I am always open to collaboration, discussions, or si
 
 ## Research Interests
 
-- **Autonomouse Driving:** Monocular Depth Estimation, Monocular 3D Object Detection, Visual Tracking, etc.
+- **Autonomous Driving:** Monocular Depth Estimation, Monocular 3D Object Detection, Visual Tracking, etc.
 - **AI for Medical:** Medical Vision, Medical Large Language Model
 
 ## News
