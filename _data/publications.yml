@@ -1,22 +1,41 @@
 main:
 
-  - title: Continual Learning for Abdominal Multi-Organ and Tumor Segmentation
-    authors: Yixiao Zhang, Xinyi Li, Huimiao Chen, Alan Yuille, <strong>Yaoyao Liu*</strong>, Zongwei Zhou* (*Corresponding authors)
-    conference_short: MICCAI
-    conference: International Conference on Medical Image Computing and Computer-Assisted Intervention <strong>(MICCAI)</strong>, 2023.
-    pdf: https://arxiv.org/pdf/2306.00988.pdf
-    code: https://github.com/MrGiovanni/ContinualLearning
-    bibtex: https://bib.yliu.me/MICCAI23.txt
-    image: ./assets/img/teaser_example_2.png
-    notes: Early Accept
+  - title: "Self-Supervised Monocular Depth Estimation by Direction-aware Cumulative Convolution Network"
+    authors: <strong>Wencheng Han</strong>, Junbo Yin, Jianbing Shen
+    conference_short: ICCV
+    conference: IEEE/CVF International Conference on Computer Vision <strong>(ICCV)</strong>, 2023.
+    pdf: https://arxiv.org/pdf/2308.05605
+    code: https://github.com/wencheng256/DaCCN
+    image: ./assets/img/teaser_example.png
 
-  - title: "Mnemonics Training: Multi-Class Incremental Learning without Forgetting"
-    authors: <strong>Yaoyao Liu</strong>, Yuting Su, An-An Liu, Bernt Schiele, Qianru Sun
+  - title: "Weakly Supervised Monocular 3D Object Detection using Multi-View Projection and Direction Consistency"
+    authors: Runzhou Tao*, <strong>Wencheng Han* (co-first author)</strong>,  Zhongying Qiu, Cheng-zhong Xu, Jianbing Shen
     conference_short: CVPR
-    conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2020.
-    pdf: https://arxiv.org/pdf/2002.10211.pdf
-    code: https://github.com/yaoyao-liu/class-incremental-learning/tree/main/mnemonics-training
-    page: https://class-il.mpi-inf.mpg.de/mnemonics/
-    bibtex: https://class-il.mpi-inf.mpg.de/mnemonics/
-    notes: Oral Presentation
+    conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2023.
+    pdf: https://openaccess.thecvf.com/content/CVPR2023/papers/Tao_Weakly_Supervised_Monocular_3D_Object_Detection_Using_Multi-View_Projection_and_CVPR_2023_paper.pdf
+    code: https://github.com/weakmono3d/weakmono3d
+    image: ./assets/img/teaser_example.png
+
+  - title: "Referring Multi-Object Tracking"
+    authors: Dongming Wu*, <strong>Wencheng Han* (co-first author)</strong>, Tiancai Wang, Xingping Dong, Xiangyu Zhang, Jianbing Shen
+    conference_short: CVPR
+    conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2023.
+    pdf: https://openaccess.thecvf.com/content/CVPR2023/papers/Wu_Referring_Multi-Object_Tracking_CVPR_2023_paper.pdf
+    code: https://referringmot.github.io/
+    image: ./assets/img/teaser_example.png
+
+  - title: "Brnet: Exploring comprehensive features for monocular depth estimation"
+    authors: <strong>Wencheng Han</strong>, Junbo Yin, Xiaogang Jin, Xiangdong Dai, Jianbing Shen
+    conference_short: ECCV
+    conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2022.
+    pdf: https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136980574.pdf
+    code: https://github.com/wencheng256/BRNet
+    image: ./assets/img/teaser_example.png
+
+  - title: "Learning to fuse asymmetric feature maps in siamese trackers"
+    authors: <strong>Wencheng Han</strong>, Xingping Dong, Fahad Shahbaz Khan, Ling Shao, Jianbing Shen
+    conference_short: CVPR
+    conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2021.
+    pdf: http://openaccess.thecvf.com/content/CVPR2021/papers/Han_Learning_To_Fuse_Asymmetric_Feature_Maps_in_Siamese_Trackers_CVPR_2021_paper.pdf
+    code: https://github.com/wencheng256/SiamBAN-ACM
     image: ./assets/img/teaser_example.png
