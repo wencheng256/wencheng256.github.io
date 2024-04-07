@@ -21,6 +21,8 @@ Thank you for stopping by. I am always open to collaboration, discussions, or si
 
 ## News
 
+- **[Apr. 2024]** One paper accepted to T-PAMI (IF:23.6).
+- **[Mar. 2024]** One paper accepted to CVPR 2024.
 - **[July. 2023]** One paper accepted to ICCV 2023.
 - **[Mar. 2023]** Two paper accepted to CVPR 2023
 - **[June. 2022]** One paper accepted to ECCV2022.
