@@ -21,6 +21,7 @@ Thank you for stopping by. I am always open to collaboration, discussions, or si
 
 ## News
 
+- **[Jul. 2024]** One paper accepted to ACM MM 2024.
 - **[Jul. 2024]** Two paper accepted to ECCV 2024.
 - **[Apr. 2024]** One paper accepted to T-PAMI (IF:23.6).
 - **[Mar. 2024]** One paper accepted to CVPR 2024.
