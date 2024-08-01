@@ -1,8 +1,47 @@
 main:
 
+  - title: "Prior Metadata-Driven RAW Reconstruction: Eliminating the Need for Per-Image Metadata"
+    authors: <strong>Wencheng Han</strong>, Junbo Yin, Jianbing Shen
+    conference_short: ACM MM 2024
+    conference: ACM Multimedia 2024.
+    # pdf: https://arxiv.org/pdf/2308.05605
+    # code: https://github.com/wencheng256/DaCCN
+    image: ./assets/img/PriorRaw.png
+
+  - title: "Asymmetric Convolution: An Efficient and Generalized Method to Fuse Feature Maps in Multiple Vision Tasks"
+    authors: <strong>Wencheng Han</strong>, X Dong, Y Zhang, D Crandall, CZ Xu, J Shen
+    conference_short: T-PAMI
+    conference: IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE.
+    # pdf: https://arxiv.org/pdf/2308.05605
+    # code: https://github.com/wencheng256/DaCCN
+    image: ./assets/img/ACM_PAMI.png
+
+  - title: "High-Precision Self-Supervised Monocular Depth Estimation with Rich-Resource Prior"
+    authors: <strong>Wencheng Han</strong>, J Shen
+    conference_short: ECCV2024
+    conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2024.
+    pdf: https://arxiv.org/pdf/2308.05605
+    code: https://github.com/wencheng256/RPrDepth
+    image: ./assets/img/RPrDepth.png
+
+  - title: "RepVF: A Unified Vector Fields Representation for Multi-task 3D Perception"
+    authors: C Li, <strong>Wencheng Han* (co-first author)</strong>, J Yin, S Zhao, J Shen
+    conference_short: ECCV2024
+    conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2024.
+    pdf: https://arxiv.org/abs/2407.10876
+    code: https://github.com/jbji/RepVF
+    image: ./assets/img/RepVF.png
+
+  - title: "Leveraging Frame Affinity for sRGB-to-RAW Video De-rendering"
+    authors: C Zhang, <strong>Wencheng Han* (co-first author)</strong>, Y Zhou, J Shen, C Xu, W Liu
+    conference_short: CVPR2024
+    conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2024.
+    pdf: https://openaccess.thecvf.com/content/CVPR2024/papers/Zhang_Leveraging_Frame_Affinity_for_sRGB-to-RAW_Video_De-rendering_CVPR_2024_paper.pdf
+    image: ./assets/img/RAWVideo.png
+
   - title: "Self-Supervised Monocular Depth Estimation by Direction-aware Cumulative Convolution Network"
     authors: <strong>Wencheng Han</strong>, Junbo Yin, Jianbing Shen
-    conference_short: ICCV
+    conference_short: ICCV2023
     conference: IEEE/CVF International Conference on Computer Vision <strong>(ICCV)</strong>, 2023.
     pdf: https://arxiv.org/pdf/2308.05605
     code: https://github.com/wencheng256/DaCCN
@@ -10,7 +49,7 @@ main:
 
   - title: "Weakly Supervised Monocular 3D Object Detection using Multi-View Projection and Direction Consistency"
     authors: Runzhou Tao*, <strong>Wencheng Han* (co-first author)</strong>,  Zhongying Qiu, Cheng-zhong Xu, Jianbing Shen
-    conference_short: CVPR
+    conference_short: CVPR2023
     conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2023.
     pdf: https://openaccess.thecvf.com/content/CVPR2023/papers/Tao_Weakly_Supervised_Monocular_3D_Object_Detection_Using_Multi-View_Projection_and_CVPR_2023_paper.pdf
     code: https://github.com/weakmono3d/weakmono3d
@@ -18,7 +57,7 @@ main:
 
   - title: "Referring Multi-Object Tracking"
     authors: Dongming Wu*, <strong>Wencheng Han* (co-first author)</strong>, Tiancai Wang, Xingping Dong, Xiangyu Zhang, Jianbing Shen
-    conference_short: CVPR
+    conference_short: CVPRCVPR2023
     conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2023.
     pdf: https://openaccess.thecvf.com/content/CVPR2023/papers/Wu_Referring_Multi-Object_Tracking_CVPR_2023_paper.pdf
     code: https://referringmot.github.io/
@@ -26,7 +65,7 @@ main:
 
   - title: "Brnet: Exploring comprehensive features for monocular depth estimation"
     authors: <strong>Wencheng Han</strong>, Junbo Yin, Xiaogang Jin, Xiangdong Dai, Jianbing Shen
-    conference_short: ECCV
+    conference_short: ECCV2022
     conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2022.
     pdf: https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136980574.pdf
     code: https://github.com/wencheng256/BRNet
@@ -34,7 +73,7 @@ main:
 
   - title: "Learning to fuse asymmetric feature maps in siamese trackers"
     authors: <strong>Wencheng Han</strong>, Xingping Dong, Fahad Shahbaz Khan, Ling Shao, Jianbing Shen
-    conference_short: CVPR
+    conference_short: CVPR2021
     conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2021.
     pdf: http://openaccess.thecvf.com/content/CVPR2021/papers/Han_Learning_To_Fuse_Asymmetric_Feature_Maps_in_Siamese_Trackers_CVPR_2021_paper.pdf
     code: https://github.com/wencheng256/SiamBAN-ACM
