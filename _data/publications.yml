@@ -1,7 +1,7 @@
 main:
 
   - title: "Prior Metadata-Driven RAW Reconstruction: Eliminating the Need for Per-Image Metadata"
-    authors: <strong>Wencheng Han</strong>, Junbo Yin, Jianbing Shen
+    authors: <strong>Wencheng Han</strong>, C Zhang, Y Zhou, W Liu, C Qian, C Xu, J Shen
     conference_short: ACM MM 2024
     conference: ACM Multimedia 2024.
     # pdf: https://arxiv.org/pdf/2308.05605
@@ -11,7 +11,7 @@ main:
   - title: "Asymmetric Convolution: An Efficient and Generalized Method to Fuse Feature Maps in Multiple Vision Tasks"
     authors: <strong>Wencheng Han</strong>, X Dong, Y Zhang, D Crandall, CZ Xu, J Shen
     conference_short: T-PAMI
-    conference: IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE.
+    conference: IEEE Transactions on Pattern Analysis and Machine Intelligence (IF=23.6), doi: 10.1109/TPAMI.2024.3400873,  2024
     # pdf: https://arxiv.org/pdf/2308.05605
     # code: https://github.com/wencheng256/DaCCN
     image: ./assets/img/ACM_PAMI.png
@@ -20,7 +20,7 @@ main:
     authors: <strong>Wencheng Han</strong>, J Shen
     conference_short: ECCV2024
     conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2024.
-    pdf: https://arxiv.org/pdf/2308.05605
+    pdf: https://arxiv.org/pdf/2408.00361v1
     code: https://github.com/wencheng256/RPrDepth
     image: ./assets/img/RPrDepth.png
 
