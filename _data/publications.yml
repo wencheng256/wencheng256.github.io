@@ -57,7 +57,7 @@ main:
 
   - title: "Referring Multi-Object Tracking"
     authors: Dongming Wu*, <strong>Wencheng Han* (co-first author)</strong>, Tiancai Wang, Xingping Dong, Xiangyu Zhang, Jianbing Shen
-    conference_short: CVPRCVPR2023
+    conference_short: CVPR2023
     conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2023.
     pdf: https://openaccess.thecvf.com/content/CVPR2023/papers/Wu_Referring_Multi-Object_Tracking_CVPR_2023_paper.pdf
     code: https://referringmot.github.io/
