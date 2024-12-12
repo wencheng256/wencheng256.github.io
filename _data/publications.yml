@@ -1,6 +1,6 @@
 main:
 
-- title: "Dme-driver: Integrating human decision logic and 3d scene perception in autonomous driving"
+  - title: "Dme-driver: Integrating human decision logic and 3d scene perception in autonomous driving"
     authors: <strong>Wencheng Han</strong>, D Guo, C Xu, J Shen
     conference_short: AAAI2025
     conference: AAAI Conference on Artificial Intelligence 2025
@@ -8,7 +8,7 @@ main:
     pdf: https://arxiv.org/pdf/2401.03641
     image: ./assets/img/DME.png
 
-- title: "Language prompt for autonomous driving"
+  - title: "Language prompt for autonomous driving"
     authors: D Wu, <strong>Wencheng Han* (co-first author)</strong>, T Wang, Y Liu, X Zhang, J Shen
     conference_short: AAAI2025
     conference: AAAI Conference on Artificial Intelligence 2025
