@@ -9,7 +9,7 @@ main:
     image: ./assets/img/DME.png
 
   - title: "Language prompt for autonomous driving"
-    authors: D Wu, <strong>Wencheng Han* (co-first author)</strong>, T Wang, Y Liu, X Zhang, J Shen
+    authors: D Wu, <strong>Wencheng Han* (co-first author)</strong>, T Wang, Y Liu, C Xu, X Zhang, J Shen
     conference_short: AAAI2025
     conference: AAAI Conference on Artificial Intelligence 2025
     pdf: https://arxiv.org/pdf/2309.04379
