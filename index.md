@@ -20,7 +20,8 @@ Thank you for stopping by. I am always open to collaboration, discussions, or si
 - **AI for Medical:** Medical Vision, Medical Large Language Model
 
 ## News
-
+- **[Mar. 2025]** One paper accepted to T-MI (IF:10.6).
+- **[Mar. 2025]** Two paper accepted to CVPR 2025.
 - **[Dec. 2024]** Two paper accepted to AAAI 2025.
 - **[Sep. 2024]** One paper accepted to T-PAMI (IF:23.6).
 - **[Jul. 2024]** One paper accepted to ACM MM 2024.
