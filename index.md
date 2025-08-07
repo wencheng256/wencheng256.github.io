@@ -3,16 +3,12 @@ layout: homepage
 ---
 
 ## About Me
+Hello and welcome! I am Wencheng Han, a recent Ph.D. graduate (June 2025) from the State Key Laboratory of Internet of Things for Smart City, University of Macau, where I was fortunate to be advised by Prof. Jianbing Shen.
+My academic journey began with a bachelor’s degree from Shandong University (2012–2016), followed by a master’s degree from Beijing Institute of Technology (2019–2022). I completed my Ph.D. in just three years, focusing on computer vision and autonomous driving.
+Before my graduate studies, I worked at Sina Weibo as a Recommendation System Development Engineer (2016–2019), gaining practical experience in large-scale machine learning systems.
 
-Hello and welcome! I am *Wencheng Han*, currently a Ph.D. student at the State Key Laboratory of Internet of Things for Smart City (University of Macau), under the esteemed guidance of Prof. Jianbing Shen.
+My research interests lie in perception for autonomous driving, including Monocular Depth Estimation, Monocular 3D Object Detection, and Visual Tracking. I’m also exploring AI applications in healthcare, with a focus on multi-modal learning and medical imaging.
 
-My academic journey began at Shandong University, where I pursued my bachelor's degree from 2012 to 2016. After that, I furthered my studies at the Beijing Institute of Technology, earning my master's degree from 2019 to 2022. In 2022, I commenced my Ph.D. studies at the University of Macau and have been engrossed in my research ever since.
-
-Professionally, between my bachelor's and master studies, I had the privilege to work with Sina Weibo, where I served as a Recommendation System Development Engineer from 2016 to 2019. This experience provided me with invaluable insights and honed my skills in the field.
-
-In my current academic pursuits, I am particularly enthralled by perception tasks for autonomous driving. This includes intriguing areas like Monocular Depth Estimation, Monocular 3D Object Detection, and Visual Tracking. My curiosity doesn't stop there. I am also venturing into the fascinating world of AI for Medical applications, diligently working on projects that intersect technology and healthcare.
-
-Thank you for stopping by. I am always open to collaboration, discussions, or simply a chat about the latest advancements in the field. Feel free to reach out!
 
 ## Research Interests
 
@@ -20,6 +16,9 @@ Thank you for stopping by. I am always open to collaboration, discussions, or si
 - **AI for Medical:** Medical Vision, Medical Large Language Model
 
 ## News
+- **[Jul. 2025]** One paper accepted to T-PAMI (IF:23.6).
+- **[Jun. 2025]** Two paper accepted to ICCV 2025.
+- **[Jun. 2025]** One paper accepted to ACL 2025.
 - **[Mar. 2025]** One paper accepted to T-MI (IF:10.6).
 - **[Mar. 2025]** Two paper accepted to CVPR 2025.
 - **[Dec. 2024]** Two paper accepted to AAAI 2025.
