@@ -3,11 +3,11 @@ layout: homepage
 ---
 
 ## About Me
-Hello and welcome! I am Wencheng Han, a recent Ph.D. graduate (June 2025) from the State Key Laboratory of Internet of Things for Smart City, University of Macau, where I was fortunate to be advised by Prof. Jianbing Shen.
-My academic journey began with a bachelor’s degree from Shandong University (2012–2016), followed by a master’s degree from Beijing Institute of Technology (2019–2022). I completed my Ph.D. in just three years, focusing on computer vision and autonomous driving.
-Before my graduate studies, I worked at Sina Weibo as a Recommendation System Development Engineer (2016–2019), gaining practical experience in large-scale machine learning systems.
+Hello and welcome! I am Wencheng Han, a postdoctoral fellow at the State Key Laboratory of Internet of Things for Smart City (SKL-IOTSC), University of Macau. I recently completed my Ph.D. in June 2025 under the supervision of Prof. Jianbing Shen.
+My academic journey began with a bachelor’s degree from Shandong University (2012–2016), followed by a master’s degree at Beijing Institute of Technology (2019–2022). I completed my Ph.D. in just three years, focusing on computer vision and autonomous driving.
+Before my graduate studies, I worked at Sina Weibo as a Recommendation System Development Engineer (2016–2019), where I gained hands-on experience in large-scale machine learning systems.
 
-My research interests lie in perception for autonomous driving, including Monocular Depth Estimation, Monocular 3D Object Detection, and Visual Tracking. I’m also exploring AI applications in healthcare, with a focus on multi-modal learning and medical imaging.
+My research interests include perception for autonomous driving—such as Monocular Depth Estimation, Monocular 3D Object Detection, and Visual Tracking—as well as AI for medical applications, particularly in multi-modal learning and medical imaging.
 
 
 ## Research Interests
