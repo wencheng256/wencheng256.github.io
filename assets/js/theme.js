@@ -57,32 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', handleResize);
     handleResize(); // 初始化
     
-    // 全局搜索功能
-    const globalSearch = document.querySelector('#global-search');
-    if (globalSearch) {
-        globalSearch.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const keyword = e.target.value.trim();
-                if (keyword) {
-                    window.location.href = `/publications.html?search=${encodeURIComponent(keyword)}`;
-                }
-            }
-        });
-    }
-    
-    // 语言切换功能
-    const languageSelector = document.querySelector('#language-selector');
-    if (languageSelector) {
-        languageSelector.addEventListener('change', function(e) {
-            const lang = e.target.value;
-            // 这里可以添加语言切换逻辑
-            console.log('切换语言到:', lang);
-            // 实际应用中，这里会重新加载页面内容
-            const currentUrl = window.location.pathname;
-            window.location.href = `${currentUrl}?lang=${lang}`;
-        });
-    }
-    
     // 精选论文点击事件
     const featuredPapers = document.querySelectorAll('.featured-paper-card');
     featuredPapers.forEach(paper => {
