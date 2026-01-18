@@ -1,4 +1,20 @@
 main:
+  - id: 0
+    title: "企业数据智能化改造和智能制造研究"
+    description: "与云脑智联（深圳）数据智能有限公司合作，开展企业数据智能化改造和智能制造相关研究。"
+    partner: "云脑智联（深圳）数据智能有限公司"
+    partner_address: "深圳市宝安区前海科兴科学园8栋506"
+    type: "industry"
+    status: "进行中"
+    start_date: "2025-06"
+    end_date: "至今"
+    pinned: true
+    highlights:
+      - "企业数据智能化改造：利用AI技术优化企业数据流程，提升数据处理效率"
+      - "智能制造系统研发：开发智能化的生产制造系统，提高生产自动化水平"
+      - "数据挖掘与分析：运用机器学习方法挖掘企业数据价值，支持决策优化"
+      - "产学研深度融合：将学术研究成果转化为实际应用，推动产业升级"
+  
   - id: 1
     title: "自动驾驶感知技术合作"
     description: "与某知名汽车公司合作，开展自动驾驶感知技术的研究与应用。"
@@ -7,6 +23,7 @@ main:
     status: "进行中"
     start_date: "2023-01"
     end_date: "2025-12"
+    pinned: false
     highlights:
       - "单目深度估计技术"
       - "3D目标检测算法"
@@ -20,6 +37,7 @@ main:
     status: "进行中"
     start_date: "2024-01"
     end_date: "2026-12"
+    pinned: false
     highlights:
       - "多模态医学影像分析"
       - "医学大语言模型"
@@ -33,6 +51,7 @@ main:
     status: "已完成"
     start_date: "2022-06"
     end_date: "2024-06"
+    pinned: false
     highlights:
       - "大规模机器学习系统"
       - "推荐算法优化"
