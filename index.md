@@ -1,7 +1,7 @@
 ---
 layout: home
 title: 韩文程  Wencheng Han
-description: "韩文程 (Wencheng Han) - 澳门大学物联网智慧城市国家重点实验室博士后研究员。专注于计算机视觉、自动驾驶感知（单目深度估计、3D目标检测、视觉跟踪）和医学AI领域的研究。"
+description: "韩文程 (Wencheng Han) - 澳门大学物联网智慧城市国家重点实验室博士后研究员。主要研究领域包括：自动驾驶、机器人控制、计算机医学和AIGC。"
 research_areas:
   - "自动驾驶"
   - "机器人控制"
