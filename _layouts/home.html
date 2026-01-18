@@ -157,16 +157,26 @@ layout: default
     <div class="bg-white rounded-2xl shadow-card p-6">
         <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
             <i class="fas fa-trophy text-primary mr-2"></i>
-            学术荣誉
+            学术荣誉 / Awards and Honors
         </h2>
         <div class="space-y-4">
             {% for honor in page.honors %}
             <div class="honor-item pl-4 py-3 rounded-r-lg">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
-                        <h3 class="font-medium text-text-primary mb-1">{{ honor.title }}</h3>
+                        <h3 class="font-medium text-text-primary mb-1">
+                            {{ honor.title }}
+                            {% if honor.title_en %}
+                            <span class="text-sm font-normal text-text-secondary">/ {{ honor.title_en }}</span>
+                            {% endif %}
+                        </h3>
                         {% if honor.organization %}
-                        <p class="text-sm text-text-secondary">{{ honor.organization }}</p>
+                        <p class="text-sm text-text-secondary">
+                            {{ honor.organization }}
+                            {% if honor.organization_en %}
+                            <span class="italic">/ {{ honor.organization_en }}</span>
+                            {% endif %}
+                        </p>
                         {% endif %}
                     </div>
                     {% if honor.year %}
