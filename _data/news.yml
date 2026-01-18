@@ -78,4 +78,44 @@ main:
     category: "research"
     category_label: "研究"
     detail_page: "/news/2024-04-tpami-paper.html"
+  
+  - id: 11
+    title: "荣获2025 Argoverse场景挖掘挑战赛第一名"
+    content: "在2025 Argoverse场景挖掘挑战赛中，我们的团队获得了第一名的优异成绩。"
+    date: "2025-01"
+    category: "award"
+    category_label: "奖项"
+    detail_page: "/news/2025-01-argoverse-award.html"
+  
+  - id: 12
+    title: "AIM 2024压缩深度图超分辨率与恢复挑战赛第一名"
+    content: "在AIM 2024挑战赛中，我们在压缩深度图超分辨率与恢复赛道获得了第一名。"
+    date: "2024-10"
+    category: "award"
+    category_label: "奖项"
+    detail_page: "/news/2024-10-aim-award.html"
+  
+  - id: 13
+    title: "CVPR 2024自主驾驶大挑战占用与流赛道第二名"
+    content: "在CVPR 2024自主驾驶大挑战中，我们在占用与流赛道获得了第二名的好成绩。"
+    date: "2024-06"
+    category: "award"
+    category_label: "奖项"
+    detail_page: "/news/2024-06-cvpr-challenge.html"
+  
+  - id: 14
+    title: "发表学术观点文章：自动驾驶感知技术的未来发展趋势"
+    content: "在知名学术期刊上发表了一篇关于自动驾驶感知技术未来发展趋势的观点文章。"
+    date: "2024-08"
+    category: "article"
+    category_label: "文章"
+    detail_page: "/news/2024-08-autonomous-driving-article.html"
+  
+  - id: 15
+    title: "撰写综述文章：医学影像AI诊断技术综述"
+    content: "撰写并发表了一篇关于医学影像AI诊断技术的综述文章，系统梳理了该领域的最新进展。"
+    date: "2024-05"
+    category: "article"
+    category_label: "文章"
+    detail_page: "/news/2024-05-medical-ai-article.html"
 
