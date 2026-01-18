@@ -1,4 +1,6 @@
-<div class="bg-white rounded-2xl shadow-card p-6 news-card cursor-pointer" data-news-id="{{ include.news.id | default: forloop.index }}">
+<div class="bg-white rounded-2xl shadow-card p-6 news-card {% if include.news.detail_page %}cursor-pointer{% endif %}" 
+     data-news-id="{{ include.news.id | default: forloop.index }}"
+     {% if include.news.detail_page %}onclick="window.location.href='{{ include.news.detail_page | relative_url }}'"{% endif %}>
     <div class="flex items-start justify-between mb-3">
         <div class="flex-1">
             <div class="flex items-center space-x-2 mb-2">
@@ -13,7 +15,11 @@
             <p class="text-sm text-text-secondary">{{ include.news.content | truncate: 150 }}</p>
         </div>
     </div>
-    {% if include.news.link %}
+    {% if include.news.detail_page %}
+    <a href="{{ include.news.detail_page | relative_url }}" class="text-sm text-primary hover:text-secondary font-medium">
+        查看详情 <i class="fas fa-arrow-right ml-1"></i>
+    </a>
+    {% elsif include.news.link %}
     <a href="{{ include.news.link }}" class="text-sm text-primary hover:text-secondary font-medium">
         了解更多 <i class="fas fa-arrow-right ml-1"></i>
     </a>

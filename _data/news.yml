@@ -5,7 +5,7 @@ main:
     date: "2025-07"
     category: "research"
     category_label: "研究"
-    link: "/publications.html"
+    detail_page: "/news/2025-07-tpami-paper.html"
   
   - id: 2
     title: "Two papers accepted to ICCV 2025"
@@ -13,7 +13,7 @@ main:
     date: "2025-06"
     category: "conference"
     category_label: "会议"
-    link: "/publications.html"
+    detail_page: "/news/2025-06-iccv-papers.html"
   
   - id: 3
     title: "One paper accepted to ACL 2025"

@@ -1,0 +1,49 @@
+---
+layout: default
+---
+
+<!-- 页面头部 -->
+<section id="page-header" class="mb-6">
+    <nav class="text-sm text-text-secondary mb-4">
+        <a href="{{ '/' | relative_url }}" class="hover:text-primary">首页</a>
+        <span class="mx-2">/</span>
+        <a href="{{ '/news.html' | relative_url }}" class="hover:text-primary">学术动态</a>
+        <span class="mx-2">/</span>
+        <span class="text-text-primary">新闻详情</span>
+    </nav>
+</section>
+
+<!-- 新闻详情 -->
+<section id="news-detail" class="mb-8">
+    <div class="bg-white rounded-2xl shadow-card p-8">
+        <!-- 新闻标题和元信息 -->
+        <div class="mb-6">
+            <div class="flex items-center space-x-2 mb-4">
+                <span class="px-3 py-1 rounded-full text-sm font-medium category-{{ page.category | default: 'other' }}">
+                    {{ page.category_label | default: page.category }}
+                </span>
+                {% if page.date %}
+                <span class="text-sm text-text-secondary">{{ page.date }}</span>
+                {% endif %}
+            </div>
+            <h1 class="text-3xl font-bold text-text-primary mb-4">{{ page.title }}</h1>
+            {% if page.subtitle %}
+            <p class="text-lg text-text-secondary mb-4">{{ page.subtitle }}</p>
+            {% endif %}
+        </div>
+        
+        <!-- 新闻内容（Markdown） -->
+        <div class="prose max-w-none">
+            {{ content }}
+        </div>
+        
+        <!-- 返回按钮 -->
+        <div class="mt-8 pt-6 border-t border-border-light">
+            <a href="{{ '/news.html' | relative_url }}" class="inline-flex items-center text-primary hover:text-secondary font-medium">
+                <i class="fas fa-arrow-left mr-2"></i>
+                返回学术动态列表
+            </a>
+        </div>
+    </div>
+</section>
+
