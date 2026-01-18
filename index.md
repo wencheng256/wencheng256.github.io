@@ -3,15 +3,17 @@ layout: home
 title: 韩文程  Wencheng Han
 description: "韩文程 (Wencheng Han) - 澳门大学物联网智慧城市国家重点实验室博士后研究员。专注于计算机视觉、自动驾驶感知（单目深度估计、3D目标检测、视觉跟踪）和医学AI领域的研究。"
 research_areas:
-  - "机器学习"
-  - "深度学习"
-  - "神经网络"
-  - "自然语言处理"
-  - "计算机视觉"
-  - "数据挖掘"
-  - "人工智能"
-  - "模式识别"
-research_overview: "主要从事机器学习、深度学习和人工智能领域的基础理论与应用研究。近年来重点关注神经网络的可解释性、大规模预训练模型的优化方法，以及AI在医疗、教育、金融等领域的应用。研究工作致力于推动人工智能技术的创新发展和实际应用，为解决复杂的科学和工程问题提供智能化解决方案。"
+  - "自动驾驶"
+  - "机器人控制"
+  - "计算机医学"
+  - "AIGC"
+research_areas_en:
+  - "Autonomous Driving"
+  - "Robot Control"
+  - "Medical Computing"
+  - "AIGC"
+research_overview: "主要从事自动驾驶、机器人控制、计算机医学和AIGC等领域的研究。在自动驾驶方面，专注于单目深度估计、3D目标检测和视觉跟踪等感知技术；在机器人控制领域，研究智能控制算法和运动规划；在计算机医学方向，探索AI在医学影像分析和诊断中的应用；在AIGC领域，关注生成式AI模型的研究与应用。"
+research_overview_en: "My research focuses on autonomous driving, robot control, medical computing, and AIGC. In autonomous driving, I specialize in perception technologies such as monocular depth estimation, 3D object detection, and visual tracking. In robot control, I work on intelligent control algorithms and motion planning. In medical computing, I explore AI applications in medical image analysis and diagnosis. In AIGC, I focus on generative AI models and their applications."
 education:
   - "博士后，澳门大学物联网智慧城市国家重点实验室 (IOTSC, University of Macau)，2025年7月至今"
   - "研究助理，澳门大学物联网智慧城市国家重点实验室 (IOTSC, University of Macau)，2025年6月-2025年7月"
