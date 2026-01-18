@@ -42,18 +42,36 @@ layout: default
         <div class="space-y-4">
             {% if page.education %}
             <div>
-                <h3 class="font-medium text-text-primary mb-2">教育背景</h3>
-                {% for edu in page.education %}
-                <p class="text-text-secondary">{{ edu }}</p>
-                {% endfor %}
+                <h3 class="font-medium text-text-primary mb-2">教育背景 / Education</h3>
+                <div class="space-y-2">
+                    {% for edu in page.education %}
+                    <p class="text-text-secondary">{{ edu }}</p>
+                    {% endfor %}
+                </div>
+                {% if page.education_en %}
+                <div class="mt-4 space-y-2">
+                    {% for edu_en in page.education_en %}
+                    <p class="text-text-secondary text-sm italic">{{ edu_en }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
             {% endif %}
             {% if page.experience %}
             <div>
-                <h3 class="font-medium text-text-primary mb-2">工作经历</h3>
-                {% for exp in page.experience %}
-                <p class="text-text-secondary">{{ exp }}</p>
-                {% endfor %}
+                <h3 class="font-medium text-text-primary mb-2">工作经历 / Work Experience</h3>
+                <div class="space-y-2">
+                    {% for exp in page.experience %}
+                    <p class="text-text-secondary">{{ exp }}</p>
+                    {% endfor %}
+                </div>
+                {% if page.experience_en %}
+                <div class="mt-4 space-y-2">
+                    {% for exp_en in page.experience_en %}
+                    <p class="text-text-secondary text-sm italic">{{ exp_en }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
             </div>
             {% endif %}
             {% if content %}
