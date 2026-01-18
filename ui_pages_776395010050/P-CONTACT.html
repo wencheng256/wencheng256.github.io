@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系与互动 - 研途科研主页</title>
+    <script src="https://unpkg.byted-static.com/coze/space_ppt_lib/1.0.3-alpha.12/lib/tailwindcss.js"></script>
+    <script src="https://unpkg.byted-static.com/fortawesome/fontawesome-free/6.7.2/js/all.min.js" data-auto-replace-svg="nest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        tertiary: '#3b82f6',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#06b6d4',
+                        'text-primary': '#1f2937',
+                        'text-secondary': '#6b7280',
+                        'bg-light': '#f8fafc',
+                        'border-light': '#e5e7eb'
+                    },
+                    boxShadow: {
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'elevated': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-collapsed {
+            width: 56px;
+        }
+        
+        .sidebar-expanded {
+            width: 240px;
+        }
+        
+        .main-content-expanded {
+            margin-left: 240px;
+        }
+        
+        .main-content-collapsed {
+            margin-left: 56px;
+        }
+        
+        .nav-item-active {
+            background-color: #dbeafe;
+            color: #2563eb;
+            border-right: 3px solid #2563eb;
+        }
+        
+        .nav-item-hover:hover {
+            background-color: #f3f4f6;
+            color: #2563eb;
+        }
+        
+        .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-1px);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .search-focus:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .form-input-focus:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .social-icon {
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact-item {
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .contact-item:hover {
+            background-color: #f8fafc;
+            transform: translateX(4px);
+        }
+        
+        .message-success {
+            background-color: #dcfce7;
+            border-color: #bbf7d0;
+            color: #166534;
+        }
+        
+        .message-error {
+            background-color: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body class="bg-bg-light min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header id="top-navbar" class="fixed top-0 left-0 right-0 bg-white border-b border-border-light h-16 z-50">
+        <div class="flex items-center justify-between h-full px-6">
+            <!-- 左侧：Logo和菜单切换 -->
+            <div class="flex items-center space-x-4">
+                <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 lg:hidden">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-text-primary">研途</h1>
+                </div>
+            </div>
+            
+            <!-- 中间：主导航菜单 -->
+            <nav id="main-nav" class="hidden lg:flex items-center space-x-8">
+                <a href="P-HOME.html" class="text-text-secondary hover:text-primary py-1 transition-colors">首页</a>
+                <a href="P-PUBLICATIONS.html" class="text-text-secondary hover:text-primary py-1 transition-colors">论文发表</a>
+                <a href="P-NEWS.html" class="text-text-secondary hover:text-primary py-1 transition-colors">学术动态</a>
+                <a href="P-RECRUITMENT.html" class="text-text-secondary hover:text-primary py-1 transition-colors">招生信息</a>
+                <a href="P-INDUSTRY_COOPERATION.html" class="text-text-secondary hover:text-primary py-1 transition-colors">产学研合作</a>
+                <a href="P-CONTACT.html" class="text-primary font-medium border-b-2 border-primary py-1">联系与互动</a>
+            </nav>
+            
+            <!-- 右侧：搜索和语言切换 -->
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" id="global-search" placeholder="搜索内容..." 
+                           class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg search-focus">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <select id="language-selector" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                    <option value="zh-CN">简体中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- 左侧菜单 -->
+    <aside id="sidebar" class="fixed left-0 top-16 bottom-0 bg-white border-r border-border-light sidebar-expanded transition-all duration-300 z-40">
+        <div class="p-4">
+            <nav class="space-y-2">
+                <a href="P-HOME.html" id="nav-home" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-home text-lg w-5"></i>
+                    <span class="sidebar-text">首页</span>
+                </a>
+                <a href="P-PUBLICATIONS.html" id="nav-publications" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-file-alt text-lg w-5"></i>
+                    <span class="sidebar-text">论文发表</span>
+                </a>
+                <a href="P-NEWS.html" id="nav-news" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-newspaper text-lg w-5"></i>
+                    <span class="sidebar-text">学术动态</span>
+                </a>
+                <a href="P-RECRUITMENT.html" id="nav-recruitment" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-user-plus text-lg w-5"></i>
+                    <span class="sidebar-text">招生信息</span>
+                </a>
+                <a href="P-INDUSTRY_COOPERATION.html" id="nav-cooperation" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-handshake text-lg w-5"></i>
+                    <span class="sidebar-text">产学研合作</span>
+                </a>
+                <a href="P-CONTACT.html" id="nav-contact" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-active">
+                    <i class="fas fa-envelope text-lg w-5"></i>
+                    <span class="sidebar-text">联系与互动</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main id="main-content" class="main-content-expanded pt-16 min-h-screen transition-all duration-300">
+        <div class="p-6 max-w-7xl mx-auto">
+            <!-- 页面头部 -->
+            <section id="page-header" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-text-primary mb-2">联系与互动</h1>
+                            <nav class="text-sm text-text-secondary">
+                                <a href="P-HOME.html" class="hover:text-primary">首页</a>
+                                <span class="mx-2">/</span>
+                                <span class="text-text-primary">联系与互动</span>
+                            </nav>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-envelope text-4xl text-primary opacity-20"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 联系方式区 -->
+            <section id="contact-info" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-address-card text-primary mr-2"></i>
+                        联系方式
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="contact-item flex items-center space-x-4 p-3 rounded-lg cursor-pointer">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-primary"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium text-text-primary">办公室地址</h3>
+                                <p class="text-text-secondary">北京市海淀区中关村大街27号计算机科学与技术学院502室</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item flex items-center space-x-4 p-3 rounded-lg cursor-pointer">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-phone text-primary"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium text-text-primary">办公电话</h3>
+                                <p class="text-text-secondary">+86 010-12345678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item flex items-center space-x-4 p-3 rounded-lg cursor-pointer">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-envelope text-primary"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium text-text-primary">邮箱地址</h3>
+                                <p class="text-text-secondary">zhang.professor@university.edu.cn</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item flex items-center space-x-4 p-3 rounded-lg cursor-pointer">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-globe text-primary"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-medium text-text-primary">个人主页</h3>
+                                <p class="text-text-secondary">https://cs.university.edu.cn/people/zhang</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 学术交流区 -->
+            <section id="academic-activities" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-chalkboard-teacher text-primary mr-2"></i>
+                        学术交流
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-primary pl-4 py-3 bg-gray-50 rounded-r-lg">
+                            <h3 class="font-medium text-text-primary mb-1">国际学术会议报告</h3>
+                            <p class="text-sm text-text-secondary mb-1">ICML 2024 - 深度学习在医疗诊断中的应用</p>
+                            <p class="text-sm text-text-secondary">2024年7月，维也纳，奥地利</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-secondary pl-4 py-3 bg-gray-50 rounded-r-lg">
+                            <h3 class="font-medium text-text-primary mb-1">特邀讲座</h3>
+                            <p class="text-sm text-text-secondary mb-1">清华大学计算机系 - 人工智能前沿技术发展趋势</p>
+                            <p class="text-sm text-text-secondary">2024年6月，北京，中国</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-tertiary pl-4 py-3 bg-gray-50 rounded-r-lg">
+                            <h3 class="font-medium text-text-primary mb-1">程序委员会成员</h3>
+                            <p class="text-sm text-text-secondary mb-1">NeurIPS 2024, ICML 2024, ICLR 2024</p>
+                            <p class="text-sm text-text-secondary">2024年</p>
+                        </div>
+                        
+                        <div class="border-l-4 border-success pl-4 py-3 bg-gray-50 rounded-r-lg">
+                            <h3 class="font-medium text-text-primary mb-1">期刊审稿人</h3>
+                            <p class="text-sm text-text-secondary mb-1">IEEE TPAMI, Nature Machine Intelligence, ACM Computing Surveys</p>
+                            <p class="text-sm text-text-secondary">2023-2024年</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 留言功能区 -->
+            <section id="message-form" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-comment-dots text-primary mr-2"></i>
+                        在线留言
+                    </h2>
+                    
+                    <!-- 留言成功提示 -->
+                    <div id="message-success" class="hidden mb-4 p-4 border rounded-lg message-success">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span>留言提交成功！我们会尽快回复您。</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 留言表单 -->
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="sender-name" class="block text-sm font-medium text-text-primary mb-2">
+                                    姓名 <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" id="sender-name" name="sender-name" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg form-input-focus" 
+                                       placeholder="请输入您的姓名" required>
+                            </div>
+                            
+                            <div>
+                                <label for="sender-email" class="block text-sm font-medium text-text-primary mb-2">
+                                    邮箱 <span class="text-danger">*</span>
+                                </label>
+                                <input type="email" id="sender-email" name="sender-email" 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg form-input-focus" 
+                                       placeholder="请输入您的邮箱地址" required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="message-subject" class="block text-sm font-medium text-text-primary mb-2">
+                                留言主题 <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" id="message-subject" name="message-subject" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg form-input-focus" 
+                                   placeholder="请输入留言主题" required>
+                        </div>
+                        
+                        <div>
+                            <label for="message-content" class="block text-sm font-medium text-text-primary mb-2">
+                                留言内容 <span class="text-danger">*</span>
+                            </label>
+                            <textarea id="message-content" name="message-content" rows="6" 
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg form-input-focus resize-none" 
+                                      placeholder="请详细描述您的问题或建议..." required></textarea>
+                        </div>
+                        
+                        <div class="flex justify-end">
+                            <button type="submit" id="submit-message" 
+                                    class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-secondary transition-colors font-medium">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                提交留言
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- 社交媒体链接区 -->
+            <section id="social-media" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-share-alt text-primary mr-2"></i>
+                        学术社交账号
+                    </h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <a href="#" id="social-researchgate" class="social-icon flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mb-3">
+                                <i class="fab fa-researchgate text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm font-medium text-text-primary">ResearchGate</span>
+                        </a>
+                        
+                        <a href="#" id="social-googlescholar" class="social-icon flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                            <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm font-medium text-text-primary">Google Scholar</span>
+                        </a>
+                        
+                        <a href="#" id="social-github" class="social-icon flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                            <div class="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mb-3">
+                                <i class="fab fa-github text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm font-medium text-text-primary">GitHub</span>
+                        </a>
+                        
+                        <a href="#" id="social-linkedin" class="social-icon flex flex-col items-center p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                            <div class="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center mb-3">
+                                <i class="fab fa-linkedin text-white text-2xl"></i>
+                            </div>
+                            <span class="text-sm font-medium text-text-primary">LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 侧边栏切换功能
+            const sidebarToggle = document.querySelector('#sidebar-toggle');
+            const sidebar = document.querySelector('#sidebar');
+            const mainContent = document.querySelector('#main-content');
+            const sidebarTexts = document.querySelectorAll('.sidebar-text');
+            
+            let sidebarCollapsed = false;
+            
+            sidebarToggle.addEventListener('click', () => {
+                sidebarCollapsed = !sidebarCollapsed;
+                
+                if (sidebarCollapsed) {
+                    sidebar.classList.remove('sidebar-expanded');
+                    sidebar.classList.add('sidebar-collapsed');
+                    mainContent.classList.remove('main-content-expanded');
+                    mainContent.classList.add('main-content-collapsed');
+                    sidebarTexts.forEach(text => text.style.display = 'none');
+                } else {
+                    sidebar.classList.remove('sidebar-collapsed');
+                    sidebar.classList.add('sidebar-expanded');
+                    mainContent.classList.remove('main-content-collapsed');
+                    mainContent.classList.add('main-content-expanded');
+                    sidebarTexts.forEach(text => text.style.display = 'block');
+                }
+            });
+            
+            // 响应式处理
+            function handleResize() {
+                if (window.innerWidth < 1024) {
+                    sidebar.style.transform = sidebarCollapsed ? 'translateX(0)' : 'translateX(-100%)';
+                    mainContent.style.marginLeft = '0';
+                } else {
+                    sidebar.style.transform = 'translateX(0)';
+                    if (sidebarCollapsed) {
+                        mainContent.classList.remove('main-content-expanded');
+                        mainContent.classList.add('main-content-collapsed');
+                    } else {
+                        mainContent.classList.remove('main-content-collapsed');
+                        mainContent.classList.add('main-content-expanded');
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', handleResize);
+            handleResize(); // 初始化
+            
+            // 搜索功能
+            const globalSearch = document.querySelector('#global-search');
+            globalSearch.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const keyword = e.target.value.trim();
+                    if (keyword) {
+                        window.location.href = `P-PUBLICATIONS.html?search=${encodeURIComponent(keyword)}`;
+                    }
+                }
+            });
+            
+            // 语言切换功能
+            const languageSelector = document.querySelector('#language-selector');
+            languageSelector.addEventListener('change', (e) => {
+                const lang = e.target.value;
+                console.log('切换语言到:', lang);
+                // 这里可以添加语言切换逻辑
+            });
+            
+            // 导航菜单点击事件
+            document.querySelector('#nav-home').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+            
+            document.querySelector('#nav-publications').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+            
+            document.querySelector('#nav-news').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-NEWS.html';
+            });
+            
+            document.querySelector('#nav-recruitment').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-RECRUITMENT.html';
+            });
+            
+            document.querySelector('#nav-cooperation').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-INDUSTRY_COOPERATION.html';
+            });
+            
+            document.querySelector('#nav-contact').addEventListener('click', function(e) {
+                e.preventDefault();
+                // 已在联系页面，无需操作
+            });
+            
+            // 顶部导航菜单点击事件
+            document.querySelector('#main-nav a[href="P-HOME.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+            
+            document.querySelector('#main-nav a[href="P-PUBLICATIONS.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+            
+            document.querySelector('#main-nav a[href="P-NEWS.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-NEWS.html';
+            });
+            
+            document.querySelector('#main-nav a[href="P-RECRUITMENT.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-RECRUITMENT.html';
+            });
+            
+            document.querySelector('#main-nav a[href="P-INDUSTRY_COOPERATION.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-INDUSTRY_COOPERATION.html';
+            });
+            
+            document.querySelector('#main-nav a[href="P-CONTACT.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                // 已在联系页面，无需操作
+            });
+            
+            // 联系方式点击事件
+            document.querySelector('#contact-info .contact-item:nth-child(1)').addEventListener('click', function() {
+                console.log('办公室地址被点击');
+                // 可以添加地图显示功能
+            });
+            
+            document.querySelector('#contact-info .contact-item:nth-child(2)').addEventListener('click', function() {
+                const phoneNumber = '+8601012345678';
+                if (confirm(`是否拨打 ${phoneNumber}？`)) {
+                    window.location.href = `tel:${phoneNumber}`;
+                }
+            });
+            
+            document.querySelector('#contact-info .contact-item:nth-child(3)').addEventListener('click', function() {
+                const email = 'zhang.professor@university.edu.cn';
+                window.location.href = `mailto:${email}`;
+            });
+            
+            document.querySelector('#contact-info .contact-item:nth-child(4)').addEventListener('click', function() {
+                const url = 'https://cs.university.edu.cn/people/zhang';
+                window.open(url, '_blank');
+            });
+            
+            // 留言表单提交事件
+            const contactForm = document.querySelector('#contact-form');
+            const messageSuccess = document.querySelector('#message-success');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // 获取表单数据
+                const formData = new FormData(contactForm);
+                const name = formData.get('sender-name');
+                const email = formData.get('sender-email');
+                const subject = formData.get('message-subject');
+                const content = formData.get('message-content');
+                
+                // 简单验证
+                if (!name || !email || !subject || !content) {
+                    alert('请填写完整的留言信息');
+                    return;
+                }
+                
+                // 模拟提交过程
+                const submitButton = document.querySelector('#submit-message');
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>提交中...';
+                
+                setTimeout(() => {
+                    // 显示成功提示
+                    messageSuccess.classList.remove('hidden');
+                    
+                    // 重置表单
+                    contactForm.reset();
+                    
+                    // 恢复按钮状态
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>提交留言';
+                    
+                    // 3秒后隐藏成功提示
+                    setTimeout(() => {
+                        messageSuccess.classList.add('hidden');
+                    }, 3000);
+                    
+                    console.log('留言提交成功:', { name, email, subject, content });
+                }, 1000);
+            });
+            
+            // 社交媒体链接点击事件
+            document.querySelector('#social-researchgate').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://www.researchgate.net/profile/Zhang-Professor', '_blank');
+            });
+            
+            document.querySelector('#social-googlescholar').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://scholar.google.com/citations?user=abc123', '_blank');
+            });
+            
+            document.querySelector('#social-github').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://github.com/zhang-professor', '_blank');
+            });
+            
+            document.querySelector('#social-linkedin').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.open('https://www.linkedin.com/in/zhang-professor', '_blank');
+            });
+        });
+    </script>
+</body>
+</html>

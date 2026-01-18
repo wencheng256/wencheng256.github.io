@@ -1,0 +1,150 @@
+---
+layout: default
+---
+
+<!-- 页面头部 -->
+<section id="page-header" class="mb-8">
+    <div class="bg-white rounded-2xl shadow-card p-8">
+        <div class="flex items-start space-x-6">
+            <div class="flex-shrink-0">
+                {% if site.avatar %}
+                <img src="{{ site.avatar | relative_url }}" 
+                     alt="{{ site.title }}" 
+                     class="w-24 h-24 rounded-full object-cover border-4 border-gray-100">
+                {% endif %}
+            </div>
+            <div class="flex-1">
+                <h1 class="text-3xl font-bold text-text-primary mb-2">{{ site.title }}</h1>
+                {% if site.position %}
+                <p class="text-lg text-text-secondary mb-2">{{ site.position }}</p>
+                {% endif %}
+                {% if site.affiliation %}
+                <p class="text-text-secondary mb-2">{{ site.affiliation }}</p>
+                {% endif %}
+                {% if page.description %}
+                <p class="text-text-secondary">{{ page.description }}</p>
+                {% elsif site.description %}
+                <p class="text-text-secondary">{{ site.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 个人简介区 -->
+{% if page.show_intro != false %}
+<section id="personal-intro" class="mb-8">
+    <div class="bg-white rounded-2xl shadow-card p-6">
+        <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+            <i class="fas fa-user text-primary mr-2"></i>
+            个人简介
+        </h2>
+        <div class="space-y-4">
+            {% if page.education %}
+            <div>
+                <h3 class="font-medium text-text-primary mb-2">教育背景</h3>
+                {% for edu in page.education %}
+                <p class="text-text-secondary">{{ edu }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if page.experience %}
+            <div>
+                <h3 class="font-medium text-text-primary mb-2">工作经历</h3>
+                {% for exp in page.experience %}
+                <p class="text-text-secondary">{{ exp }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if content %}
+            <div class="prose max-w-none">
+                {{ content }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- 精选论文区 -->
+{% if site.data.publications.main %}
+<section id="featured-papers" class="mb-8">
+    <div class="bg-white rounded-2xl shadow-card p-6">
+        <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-semibold text-text-primary flex items-center">
+                <i class="fas fa-star text-primary mr-2"></i>
+                精选论文
+            </h2>
+            <a href="{{ '/publications.html' | relative_url }}" class="text-primary hover:text-secondary text-sm font-medium">
+                查看全部 <i class="fas fa-arrow-right ml-1"></i>
+            </a>
+        </div>
+        <div class="space-y-4">
+            {% assign featured_papers = site.data.publications.main | limit: 3 %}
+            {% for paper in featured_papers %}
+            {% include publication-card.html publication=paper %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- 研究领域区 -->
+{% if page.research_areas or page.research_interests %}
+<section id="research-areas" class="mb-8">
+    <div class="bg-white rounded-2xl shadow-card p-6">
+        <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+            <i class="fas fa-flask text-primary mr-2"></i>
+            研究领域
+        </h2>
+        <div class="space-y-4">
+            {% if page.research_areas %}
+            <div>
+                <h3 class="font-medium text-text-primary mb-3">主要研究方向</h3>
+                <div class="tech-grid">
+                    {% for area in page.research_areas %}
+                    <span class="tech-tag px-3 py-1 rounded-full text-sm font-medium">{{ area }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            {% if page.research_overview %}
+            <div>
+                <h3 class="font-medium text-text-primary mb-2">研究概述</h3>
+                <p class="text-text-secondary">{{ page.research_overview }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- 学术荣誉区 -->
+{% if page.honors %}
+<section id="academic-honors" class="mb-8">
+    <div class="bg-white rounded-2xl shadow-card p-6">
+        <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+            <i class="fas fa-trophy text-primary mr-2"></i>
+            学术荣誉
+        </h2>
+        <div class="space-y-4">
+            {% for honor in page.honors %}
+            <div class="honor-item pl-4 py-3 rounded-r-lg">
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <h3 class="font-medium text-text-primary mb-1">{{ honor.title }}</h3>
+                        {% if honor.organization %}
+                        <p class="text-sm text-text-secondary">{{ honor.organization }}</p>
+                        {% endif %}
+                    </div>
+                    {% if honor.year %}
+                    <span class="text-sm text-text-secondary font-medium">{{ honor.year }}年</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论文详情 - 研途科研主页</title>
+    <script src="https://unpkg.byted-static.com/coze/space_ppt_lib/1.0.3-alpha.12/lib/tailwindcss.js"></script>
+    <script src="https://unpkg.byted-static.com/fortawesome/fontawesome-free/6.7.2/js/all.min.js" data-auto-replace-svg="nest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        tertiary: '#3b82f6',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#06b6d4',
+                        'text-primary': '#1f2937',
+                        'text-secondary': '#6b7280',
+                        'bg-light': '#f8fafc',
+                        'border-light': '#e5e7eb'
+                    },
+                    boxShadow: {
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'elevated': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-collapsed {
+            width: 56px;
+        }
+        
+        .sidebar-expanded {
+            width: 240px;
+        }
+        
+        .main-content-expanded {
+            margin-left: 240px;
+        }
+        
+        .main-content-collapsed {
+            margin-left: 56px;
+        }
+        
+        .nav-item-active {
+            background-color: #dbeafe;
+            color: #2563eb;
+            border-right: 3px solid #2563eb;
+        }
+        
+        .nav-item-hover:hover {
+            background-color: #f3f4f6;
+            color: #2563eb;
+        }
+        
+        .search-focus:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .paper-meta-item {
+            border-bottom: 1px solid #f3f4f6;
+            padding: 12px 0;
+        }
+        
+        .paper-meta-item:last-child {
+            border-bottom: none;
+        }
+        
+        .keyword-tag {
+            background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+            border: 1px solid #81d4fa;
+            color: #0277bd;
+        }
+        
+        .action-button {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .action-button:hover {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        
+        .abstract-section {
+            background-color: #f8fafc;
+            border-left: 4px solid #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-bg-light min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header id="top-navbar" class="fixed top-0 left-0 right-0 bg-white border-b border-border-light h-16 z-50">
+        <div class="flex items-center justify-between h-full px-6">
+            <!-- 左侧：Logo和菜单切换 -->
+            <div class="flex items-center space-x-4">
+                <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 lg:hidden">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-text-primary">研途</h1>
+                </div>
+            </div>
+            
+            <!-- 中间：主导航菜单 -->
+            <nav id="main-nav" class="hidden lg:flex items-center space-x-8">
+                <a href="P-HOME.html" id="nav-home-top" class="text-text-secondary hover:text-primary py-1 transition-colors">首页</a>
+                <a href="P-PUBLICATIONS.html" id="nav-publications-top" class="text-primary font-medium border-b-2 border-primary py-1">论文发表</a>
+                <a href="P-NEWS.html" id="nav-news-top" class="text-text-secondary hover:text-primary py-1 transition-colors">学术动态</a>
+                <a href="P-RECRUITMENT.html" id="nav-recruitment-top" class="text-text-secondary hover:text-primary py-1 transition-colors">招生信息</a>
+                <a href="P-INDUSTRY_COOPERATION.html" id="nav-cooperation-top" class="text-text-secondary hover:text-primary py-1 transition-colors">产学研合作</a>
+                <a href="P-CONTACT.html" id="nav-contact-top" class="text-text-secondary hover:text-primary py-1 transition-colors">联系与互动</a>
+            </nav>
+            
+            <!-- 右侧：搜索和语言切换 -->
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" id="global-search" placeholder="搜索内容..." 
+                           class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg search-focus">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <select id="language-selector" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                    <option value="zh-CN">简体中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- 左侧菜单 -->
+    <aside id="sidebar" class="fixed left-0 top-16 bottom-0 bg-white border-r border-border-light sidebar-expanded transition-all duration-300 z-40">
+        <div class="p-4">
+            <nav class="space-y-2">
+                <a href="P-HOME.html" id="nav-home" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-home text-lg w-5"></i>
+                    <span class="sidebar-text">首页</span>
+                </a>
+                <a href="P-PUBLICATIONS.html" id="nav-publications" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-active">
+                    <i class="fas fa-file-alt text-lg w-5"></i>
+                    <span class="sidebar-text">论文发表</span>
+                </a>
+                <a href="P-NEWS.html" id="nav-news" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-newspaper text-lg w-5"></i>
+                    <span class="sidebar-text">学术动态</span>
+                </a>
+                <a href="P-RECRUITMENT.html" id="nav-recruitment" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-user-plus text-lg w-5"></i>
+                    <span class="sidebar-text">招生信息</span>
+                </a>
+                <a href="P-INDUSTRY_COOPERATION.html" id="nav-cooperation" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-handshake text-lg w-5"></i>
+                    <span class="sidebar-text">产学研合作</span>
+                </a>
+                <a href="P-CONTACT.html" id="nav-contact" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-envelope text-lg w-5"></i>
+                    <span class="sidebar-text">联系与互动</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main id="main-content" class="main-content-expanded pt-16 min-h-screen transition-all duration-300">
+        <div class="p-6 max-w-7xl mx-auto">
+            <!-- 面包屑导航 -->
+            <nav id="breadcrumb" class="mb-6">
+                <ol class="flex items-center space-x-2 text-sm text-text-secondary">
+                    <li>
+                        <a href="P-HOME.html" class="hover:text-primary transition-colors">首页</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </li>
+                    <li>
+                        <a href="P-PUBLICATIONS.html" id="breadcrumb-publications" class="hover:text-primary transition-colors">论文发表</a>
+                    </li>
+                    <li>
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </li>
+                    <li class="text-text-primary font-medium">论文详情</li>
+                </ol>
+            </nav>
+
+            <!-- 论文标题 -->
+            <section id="paper-title-section" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-8">
+                    <h1 id="paper-title" class="text-3xl font-bold text-text-primary mb-4">
+                        Deep Learning Approaches for Image Recognition: A Comprehensive Survey
+                    </h1>
+                    <div class="flex items-center space-x-4 text-sm text-text-secondary">
+                        <span id="paper-authors">Zhang, L., Wang, M., Li, S.</span>
+                        <span>•</span>
+                        <span id="paper-journal">IEEE Transactions on Pattern Analysis and Machine Intelligence</span>
+                        <span>•</span>
+                        <span id="paper-year">2023</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 论文摘要 -->
+            <section id="paper-abstract" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card">
+                    <div class="abstract-section p-6">
+                        <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                            <i class="fas fa-align-left text-primary mr-2"></i>
+                            摘要
+                        </h2>
+                        <p id="paper-abstract-text" class="text-text-secondary leading-relaxed">
+                            深度学习在图像识别领域取得了显著的进展，已成为计算机视觉研究的核心技术之一。本文对深度学习在图像识别中的应用进行了全面综述，涵盖了卷积神经网络、循环神经网络、生成对抗网络等主流模型架构。我们详细分析了各种深度学习方法的原理、优缺点以及在不同图像识别任务中的表现，包括图像分类、目标检测、图像分割等。此外，本文还讨论了深度学习在图像识别中面临的挑战，如数据质量、模型解释性、计算资源需求等，并展望了未来的发展方向。通过对最新研究成果的系统梳理，本综述为从事图像识别研究的学者和工程师提供了有价值的参考。
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 论文详细信息 -->
+            <section id="paper-details" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-6 flex items-center">
+                        <i class="fas fa-info-circle text-primary mr-2"></i>
+                        详细信息
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="paper-meta-item">
+                            <div class="flex items-center justify-between">
+                                <span class="text-text-secondary font-medium w-24">作者</span>
+                                <span id="detail-authors" class="text-text-primary flex-1 ml-4">Zhang, L., Wang, M., Li, S.</span>
+                            </div>
+                        </div>
+                        <div class="paper-meta-item">
+                            <div class="flex items-center justify-between">
+                                <span class="text-text-secondary font-medium w-24">期刊/会议</span>
+                                <span id="detail-journal" class="text-text-primary flex-1 ml-4">IEEE Transactions on Pattern Analysis and Machine Intelligence</span>
+                            </div>
+                        </div>
+                        <div class="paper-meta-item">
+                            <div class="flex items-center justify-between">
+                                <span class="text-text-secondary font-medium w-24">年份</span>
+                                <span id="detail-year" class="text-text-primary flex-1 ml-4">2023</span>
+                            </div>
+                        </div>
+                        <div class="paper-meta-item">
+                            <div class="flex items-center justify-between">
+                                <span class="text-text-secondary font-medium w-24">卷</span>
+                                <span id="detail-volume" class="text-text-primary flex-1 ml-4">45</span>
+                            </div>
+                        </div>
+                        <div class="paper-meta-item">
+                            <div class="flex items-center justify-between">
+                                <span class="text-text-secondary font-medium w-24">期</span>
+                                <span id="detail-issue" class="text-text-primary flex-1 ml-4">3</span>
+                            </div>
+                        </div>
+                        <div class="paper-meta-item">
+                            <div class="flex items-center justify-between">
+                                <span class="text-text-secondary font-medium w-24">页码</span>
+                                <span id="detail-pages" class="text-text-primary flex-1 ml-4">1234-1256</span>
+                            </div>
+                        </div>
+                        <div class="paper-meta-item">
+                            <div class="flex items-center justify-between">
+                                <span class="text-text-secondary font-medium w-24">DOI</span>
+                                <a href="#" id="detail-doi" class="text-primary hover:text-secondary flex-1 ml-4 break-all">
+                                    10.1109/TPAMI.2023.3245678
+                                </a>
+                            </div>
+                        </div>
+                        <div class="paper-meta-item">
+                            <div class="flex items-start justify-between">
+                                <span class="text-text-secondary font-medium w-24 mt-1">关键词</span>
+                                <div id="detail-keywords" class="flex-1 ml-4 flex flex-wrap gap-2">
+                                    <span class="keyword-tag px-3 py-1 rounded-full text-sm font-medium">深度学习</span>
+                                    <span class="keyword-tag px-3 py-1 rounded-full text-sm font-medium">图像识别</span>
+                                    <span class="keyword-tag px-3 py-1 rounded-full text-sm font-medium">卷积神经网络</span>
+                                    <span class="keyword-tag px-3 py-1 rounded-full text-sm font-medium">计算机视觉</span>
+                                    <span class="keyword-tag px-3 py-1 rounded-full text-sm font-medium">模式识别</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 下载和链接 -->
+            <section id="paper-actions" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-6 flex items-center">
+                        <i class="fas fa-download text-primary mr-2"></i>
+                        资源下载
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button id="download-pdf" class="action-button text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center space-x-2">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>下载PDF全文</span>
+                        </button>
+                        <button id="external-link" class="bg-gray-100 text-text-primary hover:bg-gray-200 px-6 py-3 rounded-lg font-medium flex items-center justify-center space-x-2 transition-colors">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>查看IEEE Xplore</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 解析URL参数的辅助函数
+            function getUrlParams() {
+                const params = {};
+                const queryString = window.location.search.substring(1);
+                const urlParams = new URLSearchParams(queryString);
+                
+                for(const [key, value] of urlParams.entries()) {
+                    params[key] = value;
+                }
+                return params;
+            }
+
+            // 模拟论文数据
+            const paperData = {
+                "1": {
+                    title: "Deep Learning Approaches for Image Recognition: A Comprehensive Survey",
+                    authors: "Zhang, L., Wang, M., Li, S.",
+                    journal: "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+                    year: "2023",
+                    volume: "45",
+                    issue: "3",
+                    pages: "1234-1256",
+                    doi: "10.1109/TPAMI.2023.3245678",
+                    keywords: ["深度学习", "图像识别", "卷积神经网络", "计算机视觉", "模式识别"],
+                    abstract: "深度学习在图像识别领域取得了显著的进展，已成为计算机视觉研究的核心技术之一。本文对深度学习在图像识别中的应用进行了全面综述，涵盖了卷积神经网络、循环神经网络、生成对抗网络等主流模型架构。我们详细分析了各种深度学习方法的原理、优缺点以及在不同图像识别任务中的表现，包括图像分类、目标检测、图像分割等。此外，本文还讨论了深度学习在图像识别中面临的挑战，如数据质量、模型解释性、计算资源需求等，并展望了未来的发展方向。通过对最新研究成果的系统梳理，本综述为从事图像识别研究的学者和工程师提供了有价值的参考。",
+                    pdfUrl: "https://example.com/papers/deep-learning-survey.pdf",
+                    externalUrl: "https://ieeexplore.ieee.org/document/12345678"
+                },
+                "2": {
+                    title: "Machine Learning in Healthcare: Applications and Challenges",
+                    authors: "Zhang, L., Chen, H., Liu, J.",
+                    journal: "Nature Medicine",
+                    year: "2022",
+                    volume: "28",
+                    issue: "5",
+                    pages: "890-901",
+                    doi: "10.1038/s41591-022-01789-x",
+                    keywords: ["机器学习", "医疗健康", "深度学习", "医疗诊断", "健康监测"],
+                    abstract: "机器学习技术在医疗健康领域的应用正在迅速扩展，为疾病诊断、治疗方案制定和健康管理带来了革命性的变化。本文综述了机器学习在医疗影像分析、药物发现、个性化医疗、健康监测等方面的最新应用进展。我们分析了当前机器学习在医疗领域面临的数据隐私、模型可解释性、监管合规等挑战，并探讨了未来发展方向。通过对实际案例的深入分析，本文展示了机器学习如何帮助医疗专业人员提高诊断准确性、降低医疗成本，并为患者提供更好的医疗服务。",
+                    pdfUrl: "https://example.com/papers/ml-healthcare.pdf",
+                    externalUrl: "https://www.nature.com/articles/s41591-022-01789-x"
+                },
+                "3": {
+                    title: "Neural Networks for Natural Language Processing",
+                    authors: "Zhang, L., Zhao, Y., Sun, K.",
+                    journal: "ACM Computing Surveys",
+                    year: "2021",
+                    volume: "54",
+                    issue: "2",
+                    pages: "1-38",
+                    doi: "10.1145/3447548",
+                    keywords: ["神经网络", "自然语言处理", "深度学习", "语言模型", "文本分析"],
+                    abstract: "神经网络已成为自然语言处理领域的主导技术，推动了机器翻译、文本分类、情感分析、问答系统等众多应用的显著进步。本文系统综述了神经网络在自然语言处理中的应用，从早期的循环神经网络到现代的Transformer架构。我们详细分析了各种神经网络模型的工作原理、适用场景和性能特点，包括词嵌入、序列模型、注意力机制等关键技术。此外，本文还讨论了当前自然语言处理研究面临的挑战，如数据稀疏性、多语言处理、语义理解的深度等，并展望了未来的发展趋势。",
+                    pdfUrl: "https://example.com/papers/nn-nlp.pdf",
+                    externalUrl: "https://dl.acm.org/doi/10.1145/3447548"
+                }
+            };
+
+            // 获取URL参数
+            const params = getUrlParams();
+            const paperId = params.id || params.pub_id || "1"; // 支持不同参数名
+
+            // 加载论文数据
+            function loadPaperData(id) {
+                const paper = paperData[id] || paperData["1"]; // 默认显示第一篇论文
+
+                // 更新页面内容
+                document.querySelector('#paper-title').textContent = paper.title;
+                document.querySelector('#paper-authors').textContent = paper.authors;
+                document.querySelector('#paper-journal').textContent = paper.journal;
+                document.querySelector('#paper-year').textContent = paper.year;
+                document.querySelector('#paper-abstract-text').textContent = paper.abstract;
+                
+                // 更新详细信息
+                document.querySelector('#detail-authors').textContent = paper.authors;
+                document.querySelector('#detail-journal').textContent = paper.journal;
+                document.querySelector('#detail-year').textContent = paper.year;
+                document.querySelector('#detail-volume').textContent = paper.volume;
+                document.querySelector('#detail-issue').textContent = paper.issue;
+                document.querySelector('#detail-pages').textContent = paper.pages;
+                document.querySelector('#detail-doi').textContent = paper.doi;
+                document.querySelector('#detail-doi').href = `https://doi.org/${paper.doi}`;
+
+                // 更新关键词
+                const keywordsContainer = document.querySelector('#detail-keywords');
+                keywordsContainer.innerHTML = '';
+                paper.keywords.forEach(keyword => {
+                    const keywordElement = document.createElement('span');
+                    keywordElement.className = 'keyword-tag px-3 py-1 rounded-full text-sm font-medium';
+                    keywordElement.textContent = keyword;
+                    keywordsContainer.appendChild(keywordElement);
+                });
+
+                // 更新下载链接
+                document.querySelector('#download-pdf').dataset.url = paper.pdfUrl;
+                document.querySelector('#external-link').dataset.url = paper.externalUrl;
+            }
+
+            // 侧边栏切换功能
+            const sidebarToggle = document.querySelector('#sidebar-toggle');
+            const sidebar = document.querySelector('#sidebar');
+            const mainContent = document.querySelector('#main-content');
+            const sidebarTexts = document.querySelectorAll('.sidebar-text');
+            
+            let sidebarCollapsed = false;
+            
+            sidebarToggle.addEventListener('click', () => {
+                sidebarCollapsed = !sidebarCollapsed;
+                
+                if (sidebarCollapsed) {
+                    sidebar.classList.remove('sidebar-expanded');
+                    sidebar.classList.add('sidebar-collapsed');
+                    mainContent.classList.remove('main-content-expanded');
+                    mainContent.classList.add('main-content-collapsed');
+                    sidebarTexts.forEach(text => text.style.display = 'none');
+                } else {
+                    sidebar.classList.remove('sidebar-collapsed');
+                    sidebar.classList.add('sidebar-expanded');
+                    mainContent.classList.remove('main-content-collapsed');
+                    mainContent.classList.add('main-content-expanded');
+                    sidebarTexts.forEach(text => text.style.display = 'block');
+                }
+            });
+
+            // 响应式处理
+            function handleResize() {
+                if (window.innerWidth < 1024) {
+                    sidebar.style.transform = sidebarCollapsed ? 'translateX(0)' : 'translateX(-100%)';
+                    mainContent.style.marginLeft = '0';
+                } else {
+                    sidebar.style.transform = 'translateX(0)';
+                    if (sidebarCollapsed) {
+                        mainContent.classList.remove('main-content-expanded');
+                        mainContent.classList.add('main-content-collapsed');
+                    } else {
+                        mainContent.classList.remove('main-content-collapsed');
+                        mainContent.classList.add('main-content-expanded');
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', handleResize);
+            handleResize(); // 初始化
+
+            // 搜索功能
+            const globalSearch = document.querySelector('#global-search');
+            globalSearch.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const keyword = e.target.value.trim();
+                    if (keyword) {
+                        window.location.href = `P-PUBLICATIONS.html?search=${encodeURIComponent(keyword)}`;
+                    }
+                }
+            });
+
+            // 语言切换功能
+            const languageSelector = document.querySelector('#language-selector');
+            languageSelector.addEventListener('change', (e) => {
+                const lang = e.target.value;
+                console.log('切换语言到:', lang);
+                // 这里可以添加语言切换逻辑
+            });
+
+            // 下载PDF功能
+            document.querySelector('#download-pdf').addEventListener('click', function() {
+                const pdfUrl = this.dataset.url;
+                if (pdfUrl) {
+                    console.log('下载PDF:', pdfUrl);
+                    // 在实际应用中，这里会触发文件下载
+                    window.open(pdfUrl, '_blank');
+                }
+            });
+
+            // 外部链接功能
+            document.querySelector('#external-link').addEventListener('click', function() {
+                const externalUrl = this.dataset.url;
+                if (externalUrl) {
+                    console.log('打开外部链接:', externalUrl);
+                    window.open(externalUrl, '_blank');
+                }
+            });
+
+            // 导航链接事件
+            document.querySelector('#nav-home').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+
+            document.querySelector('#nav-publications').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+
+            document.querySelector('#nav-news').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-NEWS.html';
+            });
+
+            document.querySelector('#nav-recruitment').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-RECRUITMENT.html';
+            });
+
+            document.querySelector('#nav-cooperation').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-INDUSTRY_COOPERATION.html';
+            });
+
+            document.querySelector('#nav-contact').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-CONTACT.html';
+            });
+
+            // 顶部导航事件
+            document.querySelector('#nav-home-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+
+            document.querySelector('#nav-publications-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+
+            document.querySelector('#nav-news-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-NEWS.html';
+            });
+
+            document.querySelector('#nav-recruitment-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-RECRUITMENT.html';
+            });
+
+            document.querySelector('#nav-cooperation-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-INDUSTRY_COOPERATION.html';
+            });
+
+            document.querySelector('#nav-contact-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-CONTACT.html';
+            });
+
+            // 面包屑导航事件
+            document.querySelector('#breadcrumb-publications').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+
+            // 初始化页面数据
+            loadPaperData(paperId);
+        });
+    </script>
+</body>
+</html>

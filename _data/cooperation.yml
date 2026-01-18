@@ -1,0 +1,40 @@
+main:
+  - id: 1
+    title: "自动驾驶感知技术合作"
+    description: "与某知名汽车公司合作，开展自动驾驶感知技术的研究与应用。"
+    partner: "某知名汽车公司"
+    type: "industry"
+    status: "进行中"
+    start_date: "2023-01"
+    end_date: "2025-12"
+    highlights:
+      - "单目深度估计技术"
+      - "3D目标检测算法"
+      - "视觉跟踪系统"
+  
+  - id: 2
+    title: "医学影像AI诊断系统"
+    description: "与医院合作，开发基于深度学习的医学影像AI诊断系统。"
+    partner: "某三甲医院"
+    type: "medical"
+    status: "进行中"
+    start_date: "2024-01"
+    end_date: "2026-12"
+    highlights:
+      - "多模态医学影像分析"
+      - "医学大语言模型"
+      - "智能诊断辅助系统"
+  
+  - id: 3
+    title: "智能推荐系统优化"
+    description: "与企业合作，优化大规模推荐系统的性能和准确性。"
+    partner: "某互联网公司"
+    type: "industry"
+    status: "已完成"
+    start_date: "2022-06"
+    end_date: "2024-06"
+    highlights:
+      - "大规模机器学习系统"
+      - "推荐算法优化"
+      - "实时计算框架"
+

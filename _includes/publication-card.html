@@ -1,0 +1,39 @@
+<div class="border-l-4 border-primary pl-4 py-2 featured-paper-card rounded-r-lg" data-paper-id="{{ include.publication.id | default: forloop.index }}">
+    <h3 class="font-medium text-text-primary mb-1">
+        {% if include.publication.pdf %}
+        <a href="{{ include.publication.pdf }}" target="_blank" class="hover:text-primary">{{ include.publication.title }}</a>
+        {% else %}
+        {{ include.publication.title }}
+        {% endif %}
+    </h3>
+    <p class="text-sm text-text-secondary mb-1">{{ include.publication.authors }}</p>
+    <p class="text-sm text-text-secondary">
+        {% if include.publication.conference_short %}
+        <span class="badge bg-primary text-white px-2 py-1 rounded text-xs mr-2">{{ include.publication.conference_short }}</span>
+        {% endif %}
+        {{ include.publication.conference }}
+        {% if include.publication.year %}
+        , {{ include.publication.year }}
+        {% endif %}
+    </p>
+    {% if include.publication.pdf or include.publication.code or include.publication.page %}
+    <div class="mt-2 flex space-x-2">
+        {% if include.publication.pdf %}
+        <a href="{{ include.publication.pdf }}" target="_blank" class="text-xs text-primary hover:text-secondary">
+            <i class="fas fa-file-pdf mr-1"></i>PDF
+        </a>
+        {% endif %}
+        {% if include.publication.code %}
+        <a href="{{ include.publication.code }}" target="_blank" class="text-xs text-primary hover:text-secondary">
+            <i class="fab fa-github mr-1"></i>Code
+        </a>
+        {% endif %}
+        {% if include.publication.page %}
+        <a href="{{ include.publication.page }}" target="_blank" class="text-xs text-primary hover:text-secondary">
+            <i class="fas fa-link mr-1"></i>Project
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+

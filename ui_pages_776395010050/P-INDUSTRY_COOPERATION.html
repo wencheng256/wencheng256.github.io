@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产学研合作 - 研途科研主页</title>
+    <script src="https://unpkg.byted-static.com/coze/space_ppt_lib/1.0.3-alpha.12/lib/tailwindcss.js"></script>
+    <script src="https://unpkg.byted-static.com/fortawesome/fontawesome-free/6.7.2/js/all.min.js" data-auto-replace-svg="nest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        tertiary: '#3b82f6',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#06b6d4',
+                        'text-primary': '#1f2937',
+                        'text-secondary': '#6b7280',
+                        'bg-light': '#f8fafc',
+                        'border-light': '#e5e7eb'
+                    },
+                    boxShadow: {
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'elevated': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-collapsed {
+            width: 56px;
+        }
+        
+        .sidebar-expanded {
+            width: 240px;
+        }
+        
+        .main-content-expanded {
+            margin-left: 240px;
+        }
+        
+        .main-content-collapsed {
+            margin-left: 56px;
+        }
+        
+        .nav-item-active {
+            background-color: #dbeafe;
+            color: #2563eb;
+            border-right: 3px solid #2563eb;
+        }
+        
+        .nav-item-hover:hover {
+            background-color: #f3f4f6;
+            color: #2563eb;
+        }
+        
+        .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-1px);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .search-focus:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .project-card {
+            border-left: 4px solid #2563eb;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .project-card:hover {
+            border-left-color: #1e40af;
+            background-color: #f8fafc;
+        }
+        
+        .partner-card {
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .partner-card:hover {
+            border-color: #2563eb;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tech-transfer-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 1px solid #0ea5e9;
+        }
+        
+        .need-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 1px solid #f59e0b;
+        }
+        
+        /* 模态弹窗样式 */
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-enter {
+            animation: modalEnter 0.3s ease-out;
+        }
+        
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-bg-light min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header id="top-navbar" class="fixed top-0 left-0 right-0 bg-white border-b border-border-light h-16 z-50">
+        <div class="flex items-center justify-between h-full px-6">
+            <!-- 左侧：Logo和菜单切换 -->
+            <div class="flex items-center space-x-4">
+                <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 lg:hidden">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-text-primary">研途</h1>
+                </div>
+            </div>
+            
+            <!-- 中间：主导航菜单 -->
+            <nav id="main-nav" class="hidden lg:flex items-center space-x-8">
+                <a href="P-HOME.html" id="main-nav-home" class="text-text-secondary hover:text-primary py-1 transition-colors">首页</a>
+                <a href="P-PUBLICATIONS.html" id="main-nav-publications" class="text-text-secondary hover:text-primary py-1 transition-colors">论文发表</a>
+                <a href="P-NEWS.html" id="main-nav-news" class="text-text-secondary hover:text-primary py-1 transition-colors">学术动态</a>
+                <a href="P-RECRUITMENT.html" id="main-nav-recruitment" class="text-text-secondary hover:text-primary py-1 transition-colors">招生信息</a>
+                <a href="P-INDUSTRY_COOPERATION.html" id="main-nav-cooperation" class="text-primary font-medium border-b-2 border-primary py-1">产学研合作</a>
+                <a href="P-CONTACT.html" id="main-nav-contact" class="text-text-secondary hover:text-primary py-1 transition-colors">联系与互动</a>
+            </nav>
+            
+            <!-- 右侧：搜索和语言切换 -->
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" id="global-search" placeholder="搜索内容..." 
+                           class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg search-focus">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <select id="language-selector" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                    <option value="zh-CN">简体中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- 左侧菜单 -->
+    <aside id="sidebar" class="fixed left-0 top-16 bottom-0 bg-white border-r border-border-light sidebar-expanded transition-all duration-300 z-40">
+        <div class="p-4">
+            <nav class="space-y-2">
+                <a href="P-HOME.html" id="nav-home" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-home text-lg w-5"></i>
+                    <span class="sidebar-text">首页</span>
+                </a>
+                <a href="P-PUBLICATIONS.html" id="nav-publications" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-file-alt text-lg w-5"></i>
+                    <span class="sidebar-text">论文发表</span>
+                </a>
+                <a href="P-NEWS.html" id="nav-news" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-newspaper text-lg w-5"></i>
+                    <span class="sidebar-text">学术动态</span>
+                </a>
+                <a href="P-RECRUITMENT.html" id="nav-recruitment" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-user-plus text-lg w-5"></i>
+                    <span class="sidebar-text">招生信息</span>
+                </a>
+                <a href="P-INDUSTRY_COOPERATION.html" id="nav-cooperation" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-active">
+                    <i class="fas fa-handshake text-lg w-5"></i>
+                    <span class="sidebar-text">产学研合作</span>
+                </a>
+                <a href="P-CONTACT.html" id="nav-contact" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-envelope text-lg w-5"></i>
+                    <span class="sidebar-text">联系与互动</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main id="main-content" class="main-content-expanded pt-16 min-h-screen transition-all duration-300">
+        <div class="p-6 max-w-7xl mx-auto">
+            <!-- 页面头部 -->
+            <section id="page-header" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold text-text-primary mb-2">产学研合作</h1>
+                            <nav class="text-sm text-text-secondary">
+                                <a href="P-HOME.html" class="hover:text-primary">首页</a>
+                                <span class="mx-2">/</span>
+                                <span class="text-text-primary">产学研合作</span>
+                            </nav>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary">12</div>
+                                <div class="text-sm text-text-secondary">合作项目</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-success">8</div>
+                                <div class="text-sm text-text-secondary">合作单位</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-warning">6</div>
+                                <div class="text-sm text-text-secondary">技术转化</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 合作项目区 -->
+            <section id="cooperation-projects" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-project-diagram text-primary mr-2"></i>
+                        合作项目
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="project-card bg-white rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-2">基于深度学习的智能医疗诊断系统</h3>
+                                    <div class="space-y-1 text-sm text-text-secondary">
+                                        <p><i class="fas fa-building mr-1"></i>合作单位：某知名医疗科技公司</p>
+                                        <p><i class="fas fa-calendar mr-1"></i>项目周期：2023年1月 - 2024年12月</p>
+                                        <p class="mt-2">项目简介：开发基于深度学习的医学影像诊断算法，提高疾病早期筛查的准确性和效率，为医疗行业提供智能化解决方案。</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-success text-white text-sm rounded-full">进行中</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card bg-white rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-2">工业物联网数据分析平台</h3>
+                                    <div class="space-y-1 text-sm text-text-secondary">
+                                        <p><i class="fas fa-building mr-1"></i>合作单位：某大型制造企业</p>
+                                        <p><i class="fas fa-calendar mr-1"></i>项目周期：2022年6月 - 2023年12月</p>
+                                        <p class="mt-2">项目简介：构建工业设备数据采集和分析平台，实现设备状态监控、故障预警和生产优化，提升工业生产效率。</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-info text-white text-sm rounded-full">已完成</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card bg-white rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-2">金融风控AI模型研发</h3>
+                                    <div class="space-y-1 text-sm text-text-secondary">
+                                        <p><i class="fas fa-building mr-1"></i>合作单位：某商业银行</p>
+                                        <p><i class="fas fa-calendar mr-1"></i>项目周期：2023年3月 - 2025年3月</p>
+                                        <p class="mt-2">项目简介：研发基于机器学习的信贷风险评估模型，提高金融风控的精准度，降低坏账率。</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-success text-white text-sm rounded-full">进行中</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-card bg-white rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-2">教育智能化教学平台</h3>
+                                    <div class="space-y-1 text-sm text-text-secondary">
+                                        <p><i class="fas fa-building mr-1"></i>合作单位：某教育科技公司</p>
+                                        <p><i class="fas fa-calendar mr-1"></i>项目周期：2021年9月 - 2023年6月</p>
+                                        <p class="mt-2">项目简介：开发个性化学习推荐系统和智能答疑平台，为在线教育提供技术支持。</p>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-info text-white text-sm rounded-full">已完成</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 合作单位区 -->
+            <section id="cooperation-partners" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-handshake text-primary mr-2"></i>
+                        合作单位
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="partner-card bg-white rounded-lg p-4" data-partner-id="partner1">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-industry text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">某知名医疗科技公司</h3>
+                                    <span class="text-xs text-text-secondary bg-blue-100 px-2 py-1 rounded">企业</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-text-secondary">专注于医疗设备研发和医疗AI应用的高新技术企业，在智能诊断领域具有丰富经验。</p>
+                        </div>
+                        
+                        <div class="partner-card bg-white rounded-lg p-4" data-partner-id="partner2">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-success rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-industry text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">某大型制造企业</h3>
+                                    <span class="text-xs text-text-secondary bg-blue-100 px-2 py-1 rounded">企业</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-text-secondary">全球领先的制造业巨头，在工业自动化和智能制造方面处于行业领先地位。</p>
+                        </div>
+                        
+                        <div class="partner-card bg-white rounded-lg p-4" data-partner-id="partner3">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-warning rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-university text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">清华大学</h3>
+                                    <span class="text-xs text-text-secondary bg-green-100 px-2 py-1 rounded">高校</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-text-secondary">国内顶尖高等学府，在人工智能、计算机科学等领域具有深厚的学术积累。</p>
+                        </div>
+                        
+                        <div class="partner-card bg-white rounded-lg p-4" data-partner-id="partner4">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-info rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-university text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">中科院自动化所</h3>
+                                    <span class="text-xs text-text-secondary bg-purple-100 px-2 py-1 rounded">研究机构</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-text-secondary">中国科学院下属研究机构，在模式识别、智能系统等领域具有国际影响力。</p>
+                        </div>
+                        
+                        <div class="partner-card bg-white rounded-lg p-4" data-partner-id="partner5">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-university text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">某商业银行</h3>
+                                    <span class="text-xs text-text-secondary bg-blue-100 px-2 py-1 rounded">企业</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-text-secondary">全国性股份制商业银行，在金融科技和数字化转型方面投入巨大。</p>
+                        </div>
+                        
+                        <div class="partner-card bg-white rounded-lg p-4" data-partner-id="partner6">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-success rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-industry text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-medium text-text-primary">某教育科技公司</h3>
+                                    <span class="text-xs text-text-secondary bg-blue-100 px-2 py-1 rounded">企业</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-text-secondary">专注于在线教育平台开发的科技公司，致力于用技术改变教育方式。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 技术转化区 -->
+            <section id="tech-transfer" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-lightbulb text-primary mr-2"></i>
+                        技术转化
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="tech-transfer-card rounded-lg p-4">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <i class="fas fa-patent text-info"></i>
+                                <span class="text-sm font-medium text-info bg-blue-100 px-2 py-1 rounded">专利</span>
+                            </div>
+                            <h3 class="font-medium text-text-primary mb-2">基于深度学习的医学影像分析方法</h3>
+                            <p class="text-sm text-text-secondary mb-3">专利号：ZL202310000000.1</p>
+                            <p class="text-sm text-text-secondary">该专利技术已成功应用于多家医院的影像诊断系统，诊断准确率提升30%。</p>
+                        </div>
+                        
+                        <div class="tech-transfer-card rounded-lg p-4">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <i class="fas fa-rocket text-info"></i>
+                                <span class="text-sm font-medium text-info bg-blue-100 px-2 py-1 rounded">产品</span>
+                            </div>
+                            <h3 class="font-medium text-text-primary mb-2">智能风控引擎</h3>
+                            <p class="text-sm text-text-secondary mb-3">已在3家商业银行上线使用</p>
+                            <p class="text-sm text-text-secondary">基于机器学习的信贷风险评估系统，能够实时分析客户信用状况，降低坏账率。</p>
+                        </div>
+                        
+                        <div class="tech-transfer-card rounded-lg p-4">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <i class="fas fa-star text-info"></i>
+                                <span class="text-sm font-medium text-info bg-blue-100 px-2 py-1 rounded">案例</span>
+                            </div>
+                            <h3 class="font-medium text-text-primary mb-2">工业设备智能监控平台</h3>
+                            <p class="text-sm text-text-secondary mb-3">为某大型制造企业节省成本2000万/年</p>
+                            <p class="text-sm text-text-secondary">通过实时监控和预测性维护，显著提高了设备运行效率，降低了故障率。</p>
+                        </div>
+                        
+                        <div class="tech-transfer-card rounded-lg p-4">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <i class="fas fa-patent text-info"></i>
+                                <span class="text-sm font-medium text-info bg-blue-100 px-2 py-1 rounded">专利</span>
+                            </div>
+                            <h3 class="font-medium text-text-primary mb-2">自然语言处理算法优化方法</h3>
+                            <p class="text-sm text-text-secondary mb-3">专利号：ZL202310000001.2</p>
+                            <p class="text-sm text-text-secondary">该算法在多个NLP任务中表现优异，已被多家科技公司采用。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 合作需求区 -->
+            <section id="cooperation-needs" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-search text-primary mr-2"></i>
+                        合作需求
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="need-card rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-warning rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-search text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-2">寻求AI+医疗领域合作伙伴</h3>
+                                    <p class="text-sm text-text-secondary mb-3">
+                                        <strong>合作领域：</strong>医疗影像诊断、智能药物研发、健康管理
+                                    </p>
+                                    <p class="text-sm text-text-secondary mb-3">
+                                        <strong>合作方向：</strong>技术研发、数据共享、产品落地
+                                    </p>
+                                    <p class="text-sm text-text-secondary">
+                                        希望与有医疗数据资源或医疗设备研发经验的企业、医院、研究机构开展深度合作，共同推动AI技术在医疗领域的应用。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="need-card rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-warning rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-search text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-2">工业物联网数据分析合作</h3>
+                                    <p class="text-sm text-text-secondary mb-3">
+                                        <strong>合作领域：</strong>工业设备监控、预测性维护、生产优化
+                                    </p>
+                                    <p class="text-sm text-text-secondary mb-3">
+                                        <strong>合作方向：</strong>技术方案提供、项目实施、联合研发
+                                    </p>
+                                    <p class="text-sm text-text-secondary">
+                                        拥有成熟的工业数据分析算法和平台，寻求制造企业合作，共同打造智能化生产解决方案。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="need-card rounded-lg p-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-8 h-8 bg-warning rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-search text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-2">金融科技技术合作</h3>
+                                    <p class="text-sm text-text-secondary mb-3">
+                                        <strong>合作领域：</strong>智能风控、量化投资、反欺诈系统
+                                    </p>
+                                    <p class="text-sm text-text-secondary mb-3">
+                                        <strong>合作方向：</strong>技术授权、联合开发、咨询服务
+                                    </p>
+                                    <p class="text-sm text-text-secondary">
+                                        提供先进的机器学习算法和模型，为金融机构提供智能化解决方案，降低风险，提升运营效率。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 合作单位详情模态弹窗 -->
+    <div id="partner-modal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0"></div>
+        <div class="relative flex items-center justify-center min-h-screen p-4">
+            <div id="partner-modal-content" class="modal-enter bg-white rounded-2xl shadow-elevated max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 id="modal-partner-name" class="text-xl font-semibold text-text-primary">合作单位详情</h3>
+                        <button id="modal-close" class="p-2 hover:bg-gray-100 rounded-lg">
+                            <i class="fas fa-times text-gray-500"></i>
+                        </button>
+                    </div>
+                    <div id="modal-partner-content" class="space-y-4">
+                        <!-- 动态内容将在这里显示 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 侧边栏切换功能
+            const sidebarToggle = document.querySelector('#sidebar-toggle');
+            const sidebar = document.querySelector('#sidebar');
+            const mainContent = document.querySelector('#main-content');
+            const sidebarTexts = document.querySelectorAll('.sidebar-text');
+            
+            let sidebarCollapsed = false;
+            
+            sidebarToggle.addEventListener('click', () => {
+                sidebarCollapsed = !sidebarCollapsed;
+                
+                if (sidebarCollapsed) {
+                    sidebar.classList.remove('sidebar-expanded');
+                    sidebar.classList.add('sidebar-collapsed');
+                    mainContent.classList.remove('main-content-expanded');
+                    mainContent.classList.add('main-content-collapsed');
+                    sidebarTexts.forEach(text => text.style.display = 'none');
+                } else {
+                    sidebar.classList.remove('sidebar-collapsed');
+                    sidebar.classList.add('sidebar-expanded');
+                    mainContent.classList.remove('main-content-collapsed');
+                    mainContent.classList.add('main-content-expanded');
+                    sidebarTexts.forEach(text => text.style.display = 'block');
+                }
+            });
+            
+            // 响应式处理
+            function handleResize() {
+                if (window.innerWidth < 1024) {
+                    sidebar.style.transform = sidebarCollapsed ? 'translateX(0)' : 'translateX(-100%)';
+                    mainContent.style.marginLeft = '0';
+                } else {
+                    sidebar.style.transform = 'translateX(0)';
+                    if (sidebarCollapsed) {
+                        mainContent.classList.remove('main-content-expanded');
+                        mainContent.classList.add('main-content-collapsed');
+                    } else {
+                        mainContent.classList.remove('main-content-collapsed');
+                        mainContent.classList.add('main-content-expanded');
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', handleResize);
+            handleResize(); // 初始化
+            
+            // 搜索功能
+            const globalSearch = document.querySelector('#global-search');
+            globalSearch.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const keyword = e.target.value.trim();
+                    if (keyword) {
+                        window.location.href = `P-PUBLICATIONS.html?search=${encodeURIComponent(keyword)}`;
+                    }
+                }
+            });
+            
+            // 语言切换功能
+            const languageSelector = document.querySelector('#language-selector');
+            languageSelector.addEventListener('change', (e) => {
+                const lang = e.target.value;
+                console.log('切换语言到:', lang);
+            });
+            
+            // 导航菜单点击事件
+            document.querySelector('#nav-home').addEventListener('click', function() {
+                window.location.href = 'P-HOME.html';
+            });
+            
+            document.querySelector('#nav-publications').addEventListener('click', function() {
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+            
+            document.querySelector('#nav-news').addEventListener('click', function() {
+                window.location.href = 'P-NEWS.html';
+            });
+            
+            document.querySelector('#nav-recruitment').addEventListener('click', function() {
+                window.location.href = 'P-RECRUITMENT.html';
+            });
+            
+            document.querySelector('#nav-contact').addEventListener('click', function() {
+                window.location.href = 'P-CONTACT.html';
+            });
+            
+            // 顶部导航点击事件
+            document.querySelector('#main-nav-home').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+            
+            document.querySelector('#main-nav-publications').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+            
+            document.querySelector('#main-nav-news').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-NEWS.html';
+            });
+            
+            document.querySelector('#main-nav-recruitment').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-RECRUITMENT.html';
+            });
+            
+            document.querySelector('#main-nav-contact').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-CONTACT.html';
+            });
+            
+            // 合作单位详情模态弹窗
+            const partnerModal = document.querySelector('#partner-modal');
+            const modalClose = document.querySelector('#modal-close');
+            const modalOverlay = document.querySelector('.modal-overlay');
+            const modalPartnerName = document.querySelector('#modal-partner-name');
+            const modalPartnerContent = document.querySelector('#modal-partner-content');
+            
+            // 合作单位详细信息
+            const partnerDetails = {
+                'partner1': {
+                    name: '某知名医疗科技公司',
+                    type: '企业',
+                    established: '2010年',
+                    employees: '1000+',
+                    description: '专注于医疗设备研发和医疗AI应用的高新技术企业，在智能诊断领域具有丰富经验。公司拥有多项核心专利技术，产品覆盖全国3000多家医院。',
+                    achievements: [
+                        '国家高新技术企业认证',
+                        '医疗AI领域领军企业',
+                        '获得多项国际医疗技术奖项'
+                    ]
+                },
+                'partner2': {
+                    name: '某大型制造企业',
+                    type: '企业',
+                    established: '1995年',
+                    employees: '10000+',
+                    description: '全球领先的制造业巨头，在工业自动化和智能制造方面处于行业领先地位。公司在全球50多个国家设有生产基地和研发中心。',
+                    achievements: [
+                        '全球制造业500强',
+                        '工业4.0示范企业',
+                        '多项智能制造专利技术'
+                    ]
+                },
+                'partner3': {
+                    name: '清华大学',
+                    type: '高校',
+                    established: '1911年',
+                    employees: '教职工10000+',
+                    description: '国内顶尖高等学府，在人工智能、计算机科学等领域具有深厚的学术积累。清华大学计算机系在全球高校排名中始终名列前茅。',
+                    achievements: [
+                        '国内顶尖综合性大学',
+                        '计算机学科全球排名前10',
+                        '国家级重点实验室多个'
+                    ]
+                },
+                'partner4': {
+                    name: '中科院自动化所',
+                    type: '研究机构',
+                    established: '1956年',
+                    employees: '研究人员1000+',
+                    description: '中国科学院下属研究机构，在模式识别、智能系统等领域具有国际影响力。自动化所是国内人工智能研究的重要基地。',
+                    achievements: [
+                        '国家级重点实验室',
+                        '模式识别国家重点实验室',
+                        '多项国家级科技进步奖'
+                    ]
+                },
+                'partner5': {
+                    name: '某商业银行',
+                    type: '企业',
+                    established: '1996年',
+                    employees: '50000+',
+                    description: '全国性股份制商业银行，在金融科技和数字化转型方面投入巨大。银行拥有先进的技术平台和丰富的金融服务经验。',
+                    achievements: [
+                        '全国性股份制商业银行',
+                        '金融科技领先银行',
+                        '数字化转型标杆企业'
+                    ]
+                },
+                'partner6': {
+                    name: '某教育科技公司',
+                    type: '企业',
+                    established: '2015年',
+                    employees: '500+',
+                    description: '专注于在线教育平台开发的科技公司，致力于用技术改变教育方式。公司产品覆盖K12、职业教育等多个领域。',
+                    achievements: [
+                        '在线教育领军企业',
+                        '获得多项教育科技奖项',
+                        '服务用户超过1000万'
+                    ]
+                }
+            };
+            
+            // 合作单位卡片点击事件
+            const partnerCards = document.querySelectorAll('.partner-card');
+            partnerCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const partnerId = this.dataset.partnerId;
+                    const partner = partnerDetails[partnerId];
+                    
+                    if (partner) {
+                        modalPartnerName.textContent = partner.name;
+                        modalPartnerContent.innerHTML = `
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div>
+                                        <span class="text-text-secondary">单位类型：</span>
+                                        <span class="text-text-primary font-medium">${partner.type}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-text-secondary">成立时间：</span>
+                                        <span class="text-text-primary font-medium">${partner.established}</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-text-secondary">员工规模：</span>
+                                        <span class="text-text-primary font-medium">${partner.employees}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-text-primary mb-2">单位简介</h4>
+                                    <p class="text-sm text-text-secondary">${partner.description}</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-text-primary mb-2">主要成就</h4>
+                                    <ul class="space-y-1 text-sm text-text-secondary">
+                                        ${partner.achievements.map(achievement => `<li>• ${achievement}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        `;
+                        
+                        partnerModal.classList.remove('hidden');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+            
+            // 关闭模态弹窗
+            function closeModal() {
+                partnerModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+            
+            modalClose.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', closeModal);
+            
+            // ESC键关闭模态弹窗
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !partnerModal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

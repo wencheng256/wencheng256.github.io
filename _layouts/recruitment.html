@@ -1,0 +1,108 @@
+---
+layout: default
+---
+
+<!-- 页面头部 -->
+<section id="page-header" class="mb-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-text-primary mb-2">招生信息</h1>
+            <nav class="text-sm text-text-secondary">
+                <a href="{{ '/' | relative_url }}" class="hover:text-primary">首页</a>
+                <span class="mx-2">/</span>
+                <span class="text-text-primary">招生信息</span>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- 年份标签 -->
+<section id="year-tabs" class="mb-6">
+    <div class="bg-white rounded-2xl shadow-card p-4">
+        <div class="flex flex-wrap items-center space-x-4">
+            {% assign years = site.data.recruitment.main | map: 'year' | uniq | sort | reverse %}
+            {% for year in years %}
+            <button class="year-tab px-4 py-2 rounded-lg text-sm font-medium {% if forloop.first %}bg-primary text-white{% else %}bg-gray-100 text-gray-700 hover:bg-gray-200{% endif %}" data-year="{{ year }}">
+                {{ year }}年
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- 招生信息列表 -->
+<section id="recruitment-list" class="mb-6">
+    <div class="space-y-6">
+        {% for recruitment in site.data.recruitment.main %}
+        <div class="bg-white rounded-2xl shadow-card p-6 recruitment-card" data-year="{{ recruitment.year }}">
+            <div class="flex items-start justify-between mb-4">
+                <div class="flex-1">
+                    <h2 class="text-xl font-semibold text-text-primary mb-2">{{ recruitment.title }}</h2>
+                    <p class="text-sm text-text-secondary mb-2">{{ recruitment.position }} · {{ recruitment.year }}年</p>
+                    <p class="text-text-secondary">{{ recruitment.description }}</p>
+                </div>
+            </div>
+            
+            {% if recruitment.requirements %}
+            <div class="mt-4">
+                <h3 class="font-medium text-text-primary mb-3">申请要求</h3>
+                <div class="space-y-2">
+                    {% for requirement in recruitment.requirements %}
+                    <div class="requirement-item pl-4 py-2 rounded-r-lg">
+                        <p class="text-sm text-text-secondary">{{ requirement }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="mt-4 flex items-center justify-between">
+                <div class="text-sm text-text-secondary">
+                    {% if recruitment.deadline %}
+                    <span>截止日期: {{ recruitment.deadline }}</span>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if recruitment.contact %}
+                    <a href="mailto:{{ recruitment.contact }}" class="text-primary hover:text-secondary text-sm font-medium contact-link">
+                        <i class="fas fa-envelope mr-1"></i>联系邮箱
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<script>
+// 年份筛选功能
+document.addEventListener('DOMContentLoaded', function() {
+    const yearTabs = document.querySelectorAll('.year-tab');
+    const recruitmentCards = document.querySelectorAll('.recruitment-card');
+    
+    yearTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const year = this.dataset.year;
+            
+            // 更新标签状态
+            yearTabs.forEach(t => {
+                t.classList.remove('bg-primary', 'text-white');
+                t.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            this.classList.remove('bg-gray-100', 'text-gray-700');
+            this.classList.add('bg-primary', 'text-white');
+            
+            // 筛选卡片
+            recruitmentCards.forEach(card => {
+                if (card.dataset.year === year) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+

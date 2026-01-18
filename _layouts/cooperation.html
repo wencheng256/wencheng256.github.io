@@ -1,0 +1,57 @@
+---
+layout: default
+---
+
+<!-- 页面头部 -->
+<section id="page-header" class="mb-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-text-primary mb-2">产学研合作</h1>
+            <nav class="text-sm text-text-secondary">
+                <a href="{{ '/' | relative_url }}" class="hover:text-primary">首页</a>
+                <span class="mx-2">/</span>
+                <span class="text-text-primary">产学研合作</span>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- 合作项目列表 -->
+<section id="cooperation-list" class="mb-6">
+    <div class="space-y-6">
+        {% for cooperation in site.data.cooperation.main %}
+        <div class="bg-white rounded-2xl shadow-card p-6">
+            <div class="flex items-start justify-between mb-4">
+                <div class="flex-1">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <h2 class="text-xl font-semibold text-text-primary">{{ cooperation.title }}</h2>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium {% if cooperation.status == '进行中' %}bg-green-100 text-green-700{% else %}bg-gray-100 text-gray-700{% endif %}">
+                            {{ cooperation.status }}
+                        </span>
+                    </div>
+                    <p class="text-text-secondary mb-2">{{ cooperation.description }}</p>
+                    <div class="text-sm text-text-secondary">
+                        <p><strong>合作单位:</strong> {{ cooperation.partner }}</p>
+                        <p><strong>合作类型:</strong> {{ cooperation.type }}</p>
+                        <p><strong>时间:</strong> {{ cooperation.start_date }} - {{ cooperation.end_date }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            {% if cooperation.highlights %}
+            <div class="mt-4">
+                <h3 class="font-medium text-text-primary mb-3">合作亮点</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    {% for highlight in cooperation.highlights %}
+                    <div class="bg-gray-50 rounded-lg p-3">
+                        <p class="text-sm text-text-secondary">{{ highlight }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+

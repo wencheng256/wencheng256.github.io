@@ -1,0 +1,39 @@
+main:
+  - id: 1
+    title: "招收博士生"
+    position: "博士研究生"
+    year: "2025"
+    description: "招收对计算机视觉、自动驾驶感知、医学AI等领域感兴趣的博士生。"
+    requirements:
+      - "具有计算机科学、电子工程或相关专业的硕士学位"
+      - "在计算机视觉、深度学习或相关领域有研究经验"
+      - "具有良好的编程能力（Python, PyTorch/TensorFlow）"
+      - "英语水平良好，能够阅读和撰写英文论文"
+    contact: "wencheng256@gmail.com"
+    deadline: "2025-12-31"
+  
+  - id: 2
+    title: "招收硕士生"
+    position: "硕士研究生"
+    year: "2025"
+    description: "招收对人工智能、机器学习、计算机视觉等领域感兴趣的硕士生。"
+    requirements:
+      - "具有计算机科学或相关专业的学士学位"
+      - "对深度学习和计算机视觉有浓厚兴趣"
+      - "具有良好的数学基础和编程能力"
+      - "有相关项目经验者优先"
+    contact: "wencheng256@gmail.com"
+    deadline: "2025-12-31"
+  
+  - id: 3
+    title: "招收访问学生/实习生"
+    position: "访问学生/实习生"
+    year: "2025"
+    description: "欢迎优秀本科生和研究生来实验室进行访问学习和实习。"
+    requirements:
+      - "对科研有浓厚兴趣"
+      - "具有良好的学习能力和团队合作精神"
+      - "能够保证至少3个月的实习时间"
+    contact: "wencheng256@gmail.com"
+    deadline: "长期有效"
+

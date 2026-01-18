@@ -1,0 +1,31 @@
+main:
+  - title: "首页"
+    url: "/"
+    id: "home"
+    icon: "fas fa-home"
+  
+  - title: "论文发表"
+    url: "/publications.html"
+    id: "publications"
+    icon: "fas fa-file-alt"
+  
+  - title: "学术动态"
+    url: "/news.html"
+    id: "news"
+    icon: "fas fa-newspaper"
+  
+  - title: "招生信息"
+    url: "/recruitment.html"
+    id: "recruitment"
+    icon: "fas fa-user-plus"
+  
+  - title: "产学研合作"
+    url: "/cooperation.html"
+    id: "cooperation"
+    icon: "fas fa-handshake"
+  
+  - title: "联系与互动"
+    url: "/contact.html"
+    id: "contact"
+    icon: "fas fa-envelope"
+

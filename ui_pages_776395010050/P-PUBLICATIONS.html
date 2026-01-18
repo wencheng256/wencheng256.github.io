@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>论文发表 - 研途科研主页</title>
+    <script src="https://unpkg.byted-static.com/coze/space_ppt_lib/1.0.3-alpha.12/lib/tailwindcss.js"></script>
+    <script src="https://unpkg.byted-static.com/fortawesome/fontawesome-free/6.7.2/js/all.min.js" data-auto-replace-svg="nest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        tertiary: '#3b82f6',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#06b6d4',
+                        'text-primary': '#1f2937',
+                        'text-secondary': '#6b7280',
+                        'bg-light': '#f8fafc',
+                        'border-light': '#e5e7eb'
+                    },
+                    boxShadow: {
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'elevated': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-collapsed {
+            width: 56px;
+        }
+        
+        .sidebar-expanded {
+            width: 240px;
+        }
+        
+        .main-content-expanded {
+            margin-left: 240px;
+        }
+        
+        .main-content-collapsed {
+            margin-left: 56px;
+        }
+        
+        .nav-item-active {
+            background-color: #dbeafe;
+            color: #2563eb;
+            border-right: 3px solid #2563eb;
+        }
+        
+        .nav-item-hover:hover {
+            background-color: #f3f4f6;
+            color: #2563eb;
+        }
+        
+        .search-focus:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .table-row-hover:hover {
+            background-color: #f8fafc;
+        }
+        
+        .sort-button:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .sort-asc::after {
+            content: " ↑";
+            color: #2563eb;
+        }
+        
+        .sort-desc::after {
+            content: " ↓";
+            color: #2563eb;
+        }
+        
+        .filter-active {
+            background-color: #2563eb;
+            color: white;
+        }
+        
+        .pagination-active {
+            background-color: #2563eb;
+            color: white;
+        }
+        
+        .pagination-hover:hover {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-bg-light min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header id="top-navbar" class="fixed top-0 left-0 right-0 bg-white border-b border-border-light h-16 z-50">
+        <div class="flex items-center justify-between h-full px-6">
+            <!-- 左侧：Logo和菜单切换 -->
+            <div class="flex items-center space-x-4">
+                <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 lg:hidden">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-text-primary">研途</h1>
+                </div>
+            </div>
+            
+            <!-- 中间：主导航菜单 -->
+            <nav id="main-nav" class="hidden lg:flex items-center space-x-8">
+                <a href="P-HOME.html" class="text-text-secondary hover:text-primary py-1 transition-colors">首页</a>
+                <a href="P-PUBLICATIONS.html" class="text-primary font-medium border-b-2 border-primary py-1">论文发表</a>
+                <a href="P-NEWS.html" class="text-text-secondary hover:text-primary py-1 transition-colors">学术动态</a>
+                <a href="P-RECRUITMENT.html" class="text-text-secondary hover:text-primary py-1 transition-colors">招生信息</a>
+                <a href="P-INDUSTRY_COOPERATION.html" class="text-text-secondary hover:text-primary py-1 transition-colors">产学研合作</a>
+                <a href="P-CONTACT.html" class="text-text-secondary hover:text-primary py-1 transition-colors">联系与互动</a>
+            </nav>
+            
+            <!-- 右侧：搜索和语言切换 -->
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" id="global-search" placeholder="搜索内容..." 
+                           class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg search-focus">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <select id="language-selector" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                    <option value="zh-CN">简体中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- 左侧菜单 -->
+    <aside id="sidebar" class="fixed left-0 top-16 bottom-0 bg-white border-r border-border-light sidebar-expanded transition-all duration-300 z-40">
+        <div class="p-4">
+            <nav class="space-y-2">
+                <a href="P-HOME.html" id="nav-home" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-home text-lg w-5"></i>
+                    <span class="sidebar-text">首页</span>
+                </a>
+                <a href="P-PUBLICATIONS.html" id="nav-publications" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-active">
+                    <i class="fas fa-file-alt text-lg w-5"></i>
+                    <span class="sidebar-text">论文发表</span>
+                </a>
+                <a href="P-NEWS.html" id="nav-news" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-newspaper text-lg w-5"></i>
+                    <span class="sidebar-text">学术动态</span>
+                </a>
+                <a href="P-RECRUITMENT.html" id="nav-recruitment" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-user-plus text-lg w-5"></i>
+                    <span class="sidebar-text">招生信息</span>
+                </a>
+                <a href="P-INDUSTRY_COOPERATION.html" id="nav-cooperation" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-handshake text-lg w-5"></i>
+                    <span class="sidebar-text">产学研合作</span>
+                </a>
+                <a href="P-CONTACT.html" id="nav-contact" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-envelope text-lg w-5"></i>
+                    <span class="sidebar-text">联系与互动</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main id="main-content" class="main-content-expanded pt-16 min-h-screen transition-all duration-300">
+        <div class="p-6 max-w-7xl mx-auto">
+            <!-- 页面头部 -->
+            <section id="page-header" class="mb-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold text-text-primary mb-2">论文发表</h1>
+                        <nav class="text-sm text-text-secondary">
+                            <a href="P-HOME.html" class="hover:text-primary">首页</a>
+                            <span class="mx-2">/</span>
+                            <span class="text-text-primary">论文发表</span>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 工具栏区域 -->
+            <section id="toolbar" class="mb-6">
+                <div class="bg-white rounded-2xl shadow-card p-4">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+                        <!-- 搜索框 -->
+                        <div class="relative flex-1 lg:max-w-md">
+                            <input type="text" id="local-search" placeholder="搜索论文标题、作者或期刊..." 
+                                   class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg search-focus">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                        
+                        <!-- 筛选条件 -->
+                        <div class="flex flex-wrap items-center space-x-4">
+                            <!-- 年份筛选 -->
+                            <div class="flex items-center space-x-2">
+                                <label for="year-filter" class="text-sm font-medium text-text-secondary">年份:</label>
+                                <select id="year-filter" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                    <option value="">全部年份</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                </select>
+                            </div>
+                            
+                            <!-- 期刊类型筛选 -->
+                            <div class="flex items-center space-x-2">
+                                <label for="type-filter" class="text-sm font-medium text-text-secondary">类型:</label>
+                                <select id="type-filter" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                    <option value="">全部类型</option>
+                                    <option value="SCI">SCI</option>
+                                    <option value="SSCI">SSCI</option>
+                                    <option value="EI">EI</option>
+                                    <option value="核心">核心期刊</option>
+                                    <option value="会议">会议论文</option>
+                                </select>
+                            </div>
+                            
+                            <!-- 研究主题筛选 -->
+                            <div class="flex items-center space-x-2">
+                                <label for="topic-filter" class="text-sm font-medium text-text-secondary">主题:</label>
+                                <select id="topic-filter" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                                    <option value="">全部主题</option>
+                                    <option value="机器学习">机器学习</option>
+                                    <option value="深度学习">深度学习</option>
+                                    <option value="自然语言处理">自然语言处理</option>
+                                    <option value="计算机视觉">计算机视觉</option>
+                                    <option value="数据挖掘">数据挖掘</option>
+                                </select>
+                            </div>
+                            
+                            <!-- 筛选按钮 -->
+                            <button id="filter-button" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition-colors">
+                                <i class="fas fa-filter mr-2"></i>筛选
+                            </button>
+                            
+                            <!-- 重置按钮 -->
+                            <button id="reset-button" class="px-4 py-2 border border-gray-300 text-text-secondary rounded-lg hover:bg-gray-50 transition-colors">
+                                <i class="fas fa-undo mr-2"></i>重置
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 论文列表 -->
+            <section id="publications-list" class="mb-6">
+                <div class="bg-white rounded-2xl shadow-card overflow-hidden">
+                    <!-- 表格头部 -->
+                    <div class="px-6 py-4 border-b border-border-light bg-gray-50">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-text-secondary">共 <span id="total-count">28</span> 篇论文</span>
+                            <div class="flex items-center space-x-2">
+                                <label for="page-size" class="text-sm text-text-secondary">每页:</label>
+                                <select id="page-size" class="px-2 py-1 border border-gray-300 rounded text-sm">
+                                    <option value="10">10</option>
+                                    <option value="20" selected>20</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 表格 -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-border-light">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer sort-button" data-sort="title">
+                                        <div class="flex items-center">
+                                            <span>标题</span>
+                                            <i class="fas fa-sort ml-1 text-xs"></i>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">作者</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer sort-button" data-sort="journal">
+                                        <div class="flex items-center">
+                                            <span>期刊/会议</span>
+                                            <i class="fas fa-sort ml-1 text-xs"></i>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer sort-button" data-sort="year">
+                                        <div class="flex items-center">
+                                            <span>年份</span>
+                                            <i class="fas fa-sort ml-1 text-xs"></i>
+                                        </div>
+                                    </th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="publications-tbody" class="bg-white divide-y divide-gray-200">
+                                <!-- 论文数据将通过JavaScript动态生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 分页区域 -->
+            <section id="pagination" class="flex items-center justify-between">
+                <div class="text-sm text-text-secondary">
+                    显示第 <span id="start-index">1</span> - <span id="end-index">20</span> 条，共 <span id="total-items">28</span> 条
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-page" class="px-3 py-1 border border-gray-300 rounded text-sm pagination-hover" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div id="page-numbers" class="flex space-x-1">
+                        <!-- 页码按钮将通过JavaScript动态生成 -->
+                    </div>
+                    <button id="next-page" class="px-3 py-1 border border-gray-300 rounded text-sm pagination-hover">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // 模拟论文数据
+        const mockPublications = [
+            {
+                id: 1,
+                title: "Deep Learning Approaches for Image Recognition: A Comprehensive Survey",
+                authors: "Zhang, L., Wang, M., Li, S.",
+                journal: "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+                year: 2024,
+                type: "SCI",
+                topic: "计算机视觉"
+            },
+            {
+                id: 2,
+                title: "Machine Learning in Healthcare: Applications and Challenges",
+                authors: "Zhang, L., Chen, H., Liu, J.",
+                journal: "Nature Medicine",
+                year: 2024,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 3,
+                title: "Neural Networks for Natural Language Processing",
+                authors: "Zhang, L., Zhao, Y., Sun, K.",
+                journal: "ACM Computing Surveys",
+                year: 2023,
+                type: "SCI",
+                topic: "自然语言处理"
+            },
+            {
+                id: 4,
+                title: "Reinforcement Learning Algorithms: A Comparative Study",
+                authors: "Zhang, L., Wu, Q., Zhou, R.",
+                journal: "Journal of Machine Learning Research",
+                year: 2023,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 5,
+                title: "Big Data Analytics in Smart Cities",
+                authors: "Zhang, L., Huang, D., Yang, F.",
+                journal: "IEEE Internet of Things Journal",
+                year: 2023,
+                type: "SCI",
+                topic: "数据挖掘"
+            },
+            {
+                id: 6,
+                title: "Convolutional Neural Networks for Medical Imaging",
+                authors: "Zhang, L., Kim, J., Park, S.",
+                journal: "Medical Image Analysis",
+                year: 2022,
+                type: "SCI",
+                topic: "计算机视觉"
+            },
+            {
+                id: 7,
+                title: "Transformer Models in NLP: Recent Advances",
+                authors: "Zhang, L., Brown, A., Davis, M.",
+                journal: "arXiv preprint arXiv:2201.03545",
+                year: 2022,
+                type: "会议",
+                topic: "自然语言处理"
+            },
+            {
+                id: 8,
+                title: "Federated Learning for Privacy-Preserving AI",
+                authors: "Zhang, L., Smith, J., Johnson, K.",
+                journal: "ICML 2022",
+                year: 2022,
+                type: "会议",
+                topic: "机器学习"
+            },
+            {
+                id: 9,
+                title: "Graph Neural Networks: Theory and Applications",
+                authors: "Zhang, L., Wilson, E., Martinez, G.",
+                journal: "IEEE Transactions on Neural Networks and Learning Systems",
+                year: 2021,
+                type: "SCI",
+                topic: "深度学习"
+            },
+            {
+                id: 10,
+                title: "Edge Computing and AI: A Survey",
+                authors: "Zhang, L., Thompson, R., Garcia, M.",
+                journal: "IEEE Communications Surveys & Tutorials",
+                year: 2021,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 11,
+                title: "GANs in Creative Industries",
+                authors: "Zhang, L., Rodriguez, C., Lewis, N.",
+                journal: "ACM Transactions on Graphics",
+                year: 2021,
+                type: "SCI",
+                topic: "计算机视觉"
+            },
+            {
+                id: 12,
+                title: "Explainable AI: Methods and Evaluation",
+                authors: "Zhang, L., Adams, D., Baker, S.",
+                journal: "Nature Machine Intelligence",
+                year: 2020,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 13,
+                title: "Quantum Machine Learning Algorithms",
+                authors: "Zhang, L., Wilson, T., Moore, P.",
+                journal: "Physical Review A",
+                year: 2020,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 14,
+                title: "Time Series Analysis with Deep Learning",
+                authors: "Zhang, L., Young, E., Hill, R.",
+                journal: "IEEE Transactions on Knowledge and Data Engineering",
+                year: 2020,
+                type: "SCI",
+                topic: "深度学习"
+            },
+            {
+                id: 15,
+                title: "Social Network Analysis Using Machine Learning",
+                authors: "Zhang, L., King, J., Lee, M.",
+                journal: "Social Networks",
+                year: 2019,
+                type: "SSCI",
+                topic: "数据挖掘"
+            },
+            {
+                id: 16,
+                title: "Recommendation Systems: A Survey",
+                authors: "Zhang, L., Patel, S., Chen, L.",
+                journal: "ACM Computing Surveys",
+                year: 2019,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 17,
+                title: "Speech Recognition with Deep Neural Networks",
+                authors: "Zhang, L., Liu, H., Wang, Z.",
+                journal: "IEEE Transactions on Audio, Speech, and Language Processing",
+                year: 2019,
+                type: "SCI",
+                topic: "自然语言处理"
+            },
+            {
+                id: 18,
+                title: "Bioinformatics and Machine Learning",
+                authors: "Zhang, L., Chen, Y., Zhao, W.",
+                journal: "Briefings in Bioinformatics",
+                year: 2019,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 19,
+                title: "Cybersecurity and AI: Detection and Prevention",
+                authors: "Zhang, L., Brown, K., Davis, R.",
+                journal: "IEEE Security & Privacy",
+                year: 2019,
+                type: "EI",
+                topic: "数据挖掘"
+            },
+            {
+                id: 20,
+                title: "Robotics and Machine Learning Integration",
+                authors: "Zhang, L., Wilson, G., Martinez, A.",
+                journal: "IEEE Transactions on Robotics",
+                year: 2019,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 21,
+                title: "Cloud Computing and Big Data Analytics",
+                authors: "Zhang, L., Thompson, S., Garcia, R.",
+                journal: "IEEE Transactions on Cloud Computing",
+                year: 2019,
+                type: "SCI",
+                topic: "数据挖掘"
+            },
+            {
+                id: 22,
+                title: "Human-Computer Interaction with AI",
+                authors: "Zhang, L., Rodriguez, M., Lewis, K.",
+                journal: "ACM Transactions on Computer-Human Interaction",
+                year: 2019,
+                type: "SSCI",
+                topic: "自然语言处理"
+            },
+            {
+                id: 23,
+                title: "Educational Technology and Machine Learning",
+                authors: "Zhang, L., Adams, L., Baker, T.",
+                journal: "Computers & Education",
+                year: 2019,
+                type: "SSCI",
+                topic: "机器学习"
+            },
+            {
+                id: 24,
+                title: "Financial Technology and AI Applications",
+                authors: "Zhang, L., Wilson, B., Moore, S.",
+                journal: "Journal of Financial Economics",
+                year: 2019,
+                type: "SCI",
+                topic: "数据挖掘"
+            },
+            {
+                id: 25,
+                title: "Climate Science and Machine Learning",
+                authors: "Zhang, L., Young, M., Hill, P.",
+                journal: "Nature Climate Change",
+                year: 2019,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 26,
+                title: "Material Science Discovery with AI",
+                authors: "Zhang, L., King, R., Lee, T.",
+                journal: "Science",
+                year: 2019,
+                type: "SCI",
+                topic: "深度学习"
+            },
+            {
+                id: 27,
+                title: "Space Exploration and Machine Learning",
+                authors: "Zhang, L., Patel, M., Chen, R.",
+                journal: "Nature Astronomy",
+                year: 2019,
+                type: "SCI",
+                topic: "机器学习"
+            },
+            {
+                id: 28,
+                title: "Oceanography and AI Applications",
+                authors: "Zhang, L., Liu, M., Wang, T.",
+                journal: "Nature Geoscience",
+                year: 2019,
+                type: "SCI",
+                topic: "数据挖掘"
+            }
+        ];
+
+        // 全局变量
+        let currentPage = 1;
+        let pageSize = 20;
+        let sortField = '';
+        let sortOrder = '';
+        let filteredPublications = [...mockPublications];
+
+        // DOM元素
+        const publicationsTbody = document.querySelector('#publications-tbody');
+        const pageNumbers = document.querySelector('#page-numbers');
+        const prevPageBtn = document.querySelector('#prev-page');
+        const nextPageBtn = document.querySelector('#next-page');
+        const totalCountSpan = document.querySelector('#total-count');
+        const startIndexSpan = document.querySelector('#start-index');
+        const endIndexSpan = document.querySelector('#end-index');
+        const totalItemsSpan = document.querySelector('#total-items');
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePage();
+            setupEventListeners();
+            renderPublications();
+            updatePagination();
+        });
+
+        // 初始化页面
+        function initializePage() {
+            // 解析URL参数
+            const urlParams = getUrlParams();
+            if (urlParams.search) {
+                document.querySelector('#local-search').value = urlParams.search;
+                applyFilters();
+            }
+        }
+
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 侧边栏切换
+            const sidebarToggle = document.querySelector('#sidebar-toggle');
+            const sidebar = document.querySelector('#sidebar');
+            const mainContent = document.querySelector('#main-content');
+            const sidebarTexts = document.querySelectorAll('.sidebar-text');
+            
+            let sidebarCollapsed = false;
+            
+            sidebarToggle.addEventListener('click', () => {
+                sidebarCollapsed = !sidebarCollapsed;
+                
+                if (sidebarCollapsed) {
+                    sidebar.classList.remove('sidebar-expanded');
+                    sidebar.classList.add('sidebar-collapsed');
+                    mainContent.classList.remove('main-content-expanded');
+                    mainContent.classList.add('main-content-collapsed');
+                    sidebarTexts.forEach(text => text.style.display = 'none');
+                } else {
+                    sidebar.classList.remove('sidebar-collapsed');
+                    sidebar.classList.add('sidebar-expanded');
+                    mainContent.classList.remove('main-content-collapsed');
+                    mainContent.classList.add('main-content-expanded');
+                    sidebarTexts.forEach(text => text.style.display = 'block');
+                }
+            });
+
+            // 搜索功能
+            document.querySelector('#local-search').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    applyFilters();
+                }
+            });
+
+            document.querySelector('#global-search').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const keyword = e.target.value.trim();
+                    if (keyword) {
+                        window.location.href = `P-PUBLICATIONS.html?search=${encodeURIComponent(keyword)}`;
+                    }
+                }
+            });
+
+            // 筛选按钮
+            document.querySelector('#filter-button').addEventListener('click', applyFilters);
+            document.querySelector('#reset-button').addEventListener('click', resetFilters);
+
+            // 排序功能
+            document.querySelectorAll('.sort-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const field = e.currentTarget.dataset.sort;
+                    applySorting(field);
+                });
+            });
+
+            // 分页大小改变
+            document.querySelector('#page-size').addEventListener('change', (e) => {
+                pageSize = parseInt(e.target.value);
+                currentPage = 1;
+                renderPublications();
+                updatePagination();
+            });
+
+            // 分页按钮
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderPublications();
+                    updatePagination();
+                }
+            });
+
+            nextPageBtn.addEventListener('click', () => {
+                const totalPages = Math.ceil(filteredPublications.length / pageSize);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderPublications();
+                    updatePagination();
+                }
+            });
+
+            // 语言切换
+            document.querySelector('#language-selector').addEventListener('change', (e) => {
+                const lang = e.target.value;
+                console.log('切换语言到:', lang);
+            });
+
+            // 导航菜单点击事件
+            document.querySelector('#nav-home').addEventListener('click', () => {
+                window.location.href = 'P-HOME.html';
+            });
+
+            document.querySelector('#nav-publications').addEventListener('click', (e) => {
+                e.preventDefault();
+                // 已在论文发表页面，无需操作
+            });
+
+            document.querySelector('#nav-news').addEventListener('click', () => {
+                window.location.href = 'P-NEWS.html';
+            });
+
+            document.querySelector('#nav-recruitment').addEventListener('click', () => {
+                window.location.href = 'P-RECRUITMENT.html';
+            });
+
+            document.querySelector('#nav-cooperation').addEventListener('click', () => {
+                window.location.href = 'P-INDUSTRY_COOPERATION.html';
+            });
+
+            document.querySelector('#nav-contact').addEventListener('click', () => {
+                window.location.href = 'P-CONTACT.html';
+            });
+
+            // 顶部导航菜单
+            document.querySelectorAll('#main-nav a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.getAttribute('href') === 'P-PUBLICATIONS.html') {
+                        e.preventDefault();
+                        // 已在当前页面，无需操作
+                    }
+                });
+            });
+        }
+
+        // 解析URL参数
+        function getUrlParams() {
+            const params = {};
+            const queryString = window.location.search.substring(1);
+            const urlParams = new URLSearchParams(queryString);
+            
+            for(const [key, value] of urlParams.entries()) {
+                params[key] = value;
+            }
+            return params;
+        }
+
+        // 应用筛选
+        function applyFilters() {
+            const searchKeyword = document.querySelector('#local-search').value.toLowerCase().trim();
+            const yearFilter = document.querySelector('#year-filter').value;
+            const typeFilter = document.querySelector('#type-filter').value;
+            const topicFilter = document.querySelector('#topic-filter').value;
+
+            filteredPublications = mockPublications.filter(pub => {
+                const matchesSearch = !searchKeyword || 
+                    pub.title.toLowerCase().includes(searchKeyword) ||
+                    pub.authors.toLowerCase().includes(searchKeyword) ||
+                    pub.journal.toLowerCase().includes(searchKeyword);
+                
+                const matchesYear = !yearFilter || pub.year === parseInt(yearFilter);
+                const matchesType = !typeFilter || pub.type === typeFilter;
+                const matchesTopic = !topicFilter || pub.topic === topicFilter;
+
+                return matchesSearch && matchesYear && matchesType && matchesTopic;
+            });
+
+            currentPage = 1;
+            renderPublications();
+            updatePagination();
+        }
+
+        // 重置筛选
+        function resetFilters() {
+            document.querySelector('#local-search').value = '';
+            document.querySelector('#year-filter').value = '';
+            document.querySelector('#type-filter').value = '';
+            document.querySelector('#topic-filter').value = '';
+            
+            filteredPublications = [...mockPublications];
+            currentPage = 1;
+            renderPublications();
+            updatePagination();
+        }
+
+        // 应用排序
+        function applySorting(field) {
+            if (sortField === field) {
+                sortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortField = field;
+                sortOrder = 'asc';
+            }
+
+            filteredPublications.sort((a, b) => {
+                let aValue = a[field];
+                let bValue = b[field];
+
+                if (typeof aValue === 'string') {
+                    aValue = aValue.toLowerCase();
+                    bValue = bValue.toLowerCase();
+                }
+
+                if (sortOrder === 'asc') {
+                    return aValue > bValue ? 1 : -1;
+                } else {
+                    return aValue < bValue ? 1 : -1;
+                }
+            });
+
+            // 更新排序图标
+            document.querySelectorAll('.sort-button i').forEach(icon => {
+                icon.className = 'fas fa-sort ml-1 text-xs';
+            });
+
+            const currentSortIcon = document.querySelector(`[data-sort="${field}"] i`);
+            currentSortIcon.className = `fas fa-sort-${sortOrder === 'asc' ? 'up' : 'down'} ml-1 text-xs`;
+
+            renderPublications();
+        }
+
+        // 渲染论文列表
+        function renderPublications() {
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = startIndex + pageSize;
+            const currentPublications = filteredPublications.slice(startIndex, endIndex);
+
+            publicationsTbody.innerHTML = '';
+
+            currentPublications.forEach(pub => {
+                const row = document.createElement('tr');
+                row.className = 'table-row-hover cursor-pointer';
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-primary hover:text-secondary cursor-pointer" onclick="viewPublicationDetail(${pub.id})">
+                            ${pub.title}
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                        ${pub.authors}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                        ${pub.journal}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                        ${pub.year}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button onclick="viewPublicationDetail(${pub.id})" class="text-primary hover:text-secondary">
+                            <i class="fas fa-eye mr-1"></i>查看详情
+                        </button>
+                    </td>
+                `;
+                publicationsTbody.appendChild(row);
+            });
+
+            // 更新统计信息
+            totalCountSpan.textContent = filteredPublications.length;
+            startIndexSpan.textContent = filteredPublications.length > 0 ? startIndex + 1 : 0;
+            endIndexSpan.textContent = Math.min(endIndex, filteredPublications.length);
+            totalItemsSpan.textContent = filteredPublications.length;
+        }
+
+        // 更新分页
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredPublications.length / pageSize);
+
+            // 更新上一页按钮状态
+            prevPageBtn.disabled = currentPage === 1;
+            if (currentPage === 1) {
+                prevPageBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                prevPageBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            // 更新下一页按钮状态
+            nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
+            if (currentPage === totalPages || totalPages === 0) {
+                nextPageBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                nextPageBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            // 生成页码按钮
+            pageNumbers.innerHTML = '';
+
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = `px-3 py-1 border border-gray-300 rounded text-sm ${i === currentPage ? 'pagination-active' : 'pagination-hover'}`;
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderPublications();
+                    updatePagination();
+                });
+                pageNumbers.appendChild(pageBtn);
+            }
+        }
+
+        // 查看论文详情
+        function viewPublicationDetail(pubId) {
+            window.location.href = `P-PUBLICATION_DETAIL.html?id=${pubId}`;
+        }
+
+        // 响应式处理
+        function handleResize() {
+            const sidebar = document.querySelector('#sidebar');
+            const mainContent = document.querySelector('#main-content');
+            
+            if (window.innerWidth < 1024) {
+                sidebar.style.transform = 'translateX(-100%)';
+                mainContent.style.marginLeft = '0';
+            } else {
+                sidebar.style.transform = 'translateX(0)';
+                mainContent.classList.remove('main-content-collapsed');
+                mainContent.classList.add('main-content-expanded');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // 初始化
+    </script>
+</body>
+</html>

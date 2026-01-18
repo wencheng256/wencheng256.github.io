@@ -4,6 +4,9 @@ main:
     authors: <strong>Wencheng Han</strong>, D Guo, C Xu, J Shen
     conference_short: AAAI2025
     conference: AAAI Conference on Artificial Intelligence 2025
+    year: 2025
+    type: "会议"
+    topic: "计算机视觉"
     # code: https://github.com/wencheng256/DaCCN
     pdf: https://arxiv.org/pdf/2401.03641
     image: ./assets/img/DME.png
@@ -12,6 +15,9 @@ main:
     authors: D Wu, <strong>Wencheng Han* (co-first author)</strong>, T Wang, Y Liu, C Xu, X Zhang, J Shen
     conference_short: AAAI2025
     conference: AAAI Conference on Artificial Intelligence 2025
+    year: 2025
+    type: "会议"
+    topic: "计算机视觉"
     pdf: https://arxiv.org/pdf/2309.04379
     code: https://github.com/wudongming97/Prompt4Driving
     image: ./assets/img/NuPromot.png
@@ -20,12 +26,18 @@ main:
     authors: <strong>Wencheng Han</strong>, R Tao, H Ling, J Shen
     conference_short: T-PAMI
     conference: "IEEE Transactions on Pattern Analysis and Machine Intelligence (IF=23.6), doi: 10.1109/TPAMI.2024.3466915, 2024"
+    year: 2024
+    type: "SCI"
+    topic: "计算机视觉"
     image: ./assets/img/WeakMono.png
     
   - title: "Prior Metadata-Driven RAW Reconstruction: Eliminating the Need for Per-Image Metadata"
     authors: <strong>Wencheng Han</strong>, C Zhang, Y Zhou, W Liu, C Qian, C Xu, J Shen
     conference_short: ACM MM 2024
     conference: ACM Multimedia 2024.
+    year: 2024
+    type: "会议"
+    topic: "计算机视觉"
     # pdf: https://arxiv.org/pdf/2308.05605
     # code: https://github.com/wencheng256/DaCCN
     image: ./assets/img/PriorRaw.png
@@ -34,6 +46,9 @@ main:
     authors: <strong>Wencheng Han</strong>, X Dong, Y Zhang, D Crandall, CZ Xu, J Shen
     conference_short: T-PAMI
     conference: "IEEE Transactions on Pattern Analysis and Machine Intelligence (IF=23.6), doi: 10.1109/TPAMI.2024.3400873, 2024"
+    year: 2024
+    type: "SCI"
+    topic: "计算机视觉"
     # pdf: https://arxiv.org/pdf/2308.05605
     # code: https://github.com/wencheng256/DaCCN
     image: ./assets/img/ACM_PAMI.png
@@ -42,6 +57,9 @@ main:
     authors: <strong>Wencheng Han</strong>, J Shen
     conference_short: ECCV2024
     conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2024.
+    year: 2024
+    type: "会议"
+    topic: "计算机视觉"
     pdf: https://arxiv.org/pdf/2408.00361v1
     code: https://github.com/wencheng256/RPrDepth
     image: ./assets/img/RPrDepth.png
@@ -50,6 +68,9 @@ main:
     authors: C Li, <strong>Wencheng Han* (co-first author)</strong>, J Yin, S Zhao, J Shen
     conference_short: ECCV2024
     conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2024.
+    year: 2024
+    type: "会议"
+    topic: "计算机视觉"
     pdf: https://arxiv.org/abs/2407.10876
     code: https://github.com/jbji/RepVF
     image: ./assets/img/RepVF.png
@@ -58,6 +79,9 @@ main:
     authors: C Zhang, <strong>Wencheng Han* (co-first author)</strong>, Y Zhou, J Shen, C Xu, W Liu
     conference_short: CVPR2024
     conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2024.
+    year: 2024
+    type: "会议"
+    topic: "计算机视觉"
     pdf: https://openaccess.thecvf.com/content/CVPR2024/papers/Zhang_Leveraging_Frame_Affinity_for_sRGB-to-RAW_Video_De-rendering_CVPR_2024_paper.pdf
     image: ./assets/img/RAWVideo.png
 
@@ -65,6 +89,9 @@ main:
     authors: <strong>Wencheng Han</strong>, Junbo Yin, Jianbing Shen
     conference_short: ICCV2023
     conference: IEEE/CVF International Conference on Computer Vision <strong>(ICCV)</strong>, 2023.
+    year: 2023
+    type: "会议"
+    topic: "计算机视觉"
     pdf: https://arxiv.org/pdf/2308.05605
     code: https://github.com/wencheng256/DaCCN
     image: ./assets/img/DaCCN.png
@@ -73,6 +100,9 @@ main:
     authors: Runzhou Tao*, <strong>Wencheng Han* (co-first author)</strong>,  Zhongying Qiu, Cheng-zhong Xu, Jianbing Shen
     conference_short: CVPR2023
     conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2023.
+    year: 2023
+    type: "会议"
+    topic: "计算机视觉"
     pdf: https://openaccess.thecvf.com/content/CVPR2023/papers/Tao_Weakly_Supervised_Monocular_3D_Object_Detection_Using_Multi-View_Projection_and_CVPR_2023_paper.pdf
     code: https://github.com/weakmono3d/weakmono3d
     image: ./assets/img/WeakMono3D.png
@@ -81,6 +111,9 @@ main:
     authors: Dongming Wu*, <strong>Wencheng Han* (co-first author)</strong>, Tiancai Wang, Xingping Dong, Xiangyu Zhang, Jianbing Shen
     conference_short: CVPR2023
     conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2023.
+    year: 2023
+    type: "会议"
+    topic: "计算机视觉"
     pdf: https://openaccess.thecvf.com/content/CVPR2023/papers/Wu_Referring_Multi-Object_Tracking_CVPR_2023_paper.pdf
     code: https://referringmot.github.io/
     image: ./assets/img/RefMOT.png
@@ -89,6 +122,9 @@ main:
     authors: <strong>Wencheng Han</strong>, Junbo Yin, Xiaogang Jin, Xiangdong Dai, Jianbing Shen
     conference_short: ECCV2022
     conference: European Conference on Computer Vision <strong>(ECCV)</strong>, 2022.
+    year: 2022
+    type: "会议"
+    topic: "计算机视觉"
     pdf: https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136980574.pdf
     code: https://github.com/wencheng256/BRNet
     image: ./assets/img/BRNet.png
@@ -97,6 +133,9 @@ main:
     authors: <strong>Wencheng Han</strong>, Xingping Dong, Fahad Shahbaz Khan, Ling Shao, Jianbing Shen
     conference_short: CVPR2021
     conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2021.
+    year: 2021
+    type: "会议"
+    topic: "计算机视觉"
     pdf: http://openaccess.thecvf.com/content/CVPR2021/papers/Han_Learning_To_Fuse_Asymmetric_Feature_Maps_in_Siamese_Trackers_CVPR_2021_paper.pdf
     code: https://github.com/wencheng256/SiamBAN-ACM
     image: ./assets/img/ACM.png

@@ -1,0 +1,190 @@
+---
+layout: default
+---
+
+<!-- 页面头部 -->
+<section id="page-header" class="mb-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-text-primary mb-2">论文发表</h1>
+            <nav class="text-sm text-text-secondary">
+                <a href="{{ '/' | relative_url }}" class="hover:text-primary">首页</a>
+                <span class="mx-2">/</span>
+                <span class="text-text-primary">论文发表</span>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- 工具栏区域 -->
+<section id="toolbar" class="mb-6">
+    <div class="bg-white rounded-2xl shadow-card p-4">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+            <!-- 搜索框 -->
+            <div class="relative flex-1 lg:max-w-md">
+                <input type="text" id="local-search" placeholder="搜索论文标题、作者或期刊..." 
+                       class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg search-focus">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+            
+            <!-- 筛选条件 -->
+            <div class="flex flex-wrap items-center space-x-4">
+                <!-- 年份筛选 -->
+                <div class="flex items-center space-x-2">
+                    <label for="year-filter" class="text-sm font-medium text-text-secondary">年份:</label>
+                    <select id="year-filter" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                        <option value="">全部年份</option>
+                        {% assign years = site.data.publications.main | map: 'year' | uniq | sort | reverse %}
+                        {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <!-- 期刊类型筛选 -->
+                <div class="flex items-center space-x-2">
+                    <label for="type-filter" class="text-sm font-medium text-text-secondary">类型:</label>
+                    <select id="type-filter" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                        <option value="">全部类型</option>
+                        <option value="SCI">SCI</option>
+                        <option value="SSCI">SSCI</option>
+                        <option value="EI">EI</option>
+                        <option value="核心">核心期刊</option>
+                        <option value="会议">会议论文</option>
+                    </select>
+                </div>
+                
+                <!-- 研究主题筛选 -->
+                <div class="flex items-center space-x-2">
+                    <label for="topic-filter" class="text-sm font-medium text-text-secondary">主题:</label>
+                    <select id="topic-filter" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                        <option value="">全部主题</option>
+                        {% assign topics = site.data.publications.main | map: 'topic' | uniq | compact %}
+                        {% for topic in topics %}
+                        <option value="{{ topic }}">{{ topic }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <!-- 筛选按钮 -->
+                <button id="filter-button" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary transition-colors">
+                    <i class="fas fa-filter mr-2"></i>筛选
+                </button>
+                
+                <!-- 重置按钮 -->
+                <button id="reset-button" class="px-4 py-2 border border-gray-300 text-text-secondary rounded-lg hover:bg-gray-50 transition-colors">
+                    <i class="fas fa-undo mr-2"></i>重置
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 论文列表 -->
+<section id="publications-list" class="mb-6">
+    <div class="bg-white rounded-2xl shadow-card overflow-hidden">
+        <!-- 表格头部 -->
+        <div class="px-6 py-4 border-b border-border-light bg-gray-50">
+            <div class="flex items-center justify-between">
+                <span class="text-sm font-medium text-text-secondary">共 <span id="total-count">{{ site.data.publications.main.size }}</span> 篇论文</span>
+                <div class="flex items-center space-x-2">
+                    <label for="page-size" class="text-sm text-text-secondary">每页:</label>
+                    <select id="page-size" class="px-2 py-1 border border-gray-300 rounded text-sm">
+                        <option value="10">10</option>
+                        <option value="20" selected>20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 表格 -->
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gray-50 border-b border-border-light">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer sort-button" data-sort="title">
+                            <div class="flex items-center">
+                                <span>标题</span>
+                                <i class="fas fa-sort ml-1 text-xs"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">作者</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer sort-button" data-sort="conference_short">
+                            <div class="flex items-center">
+                                <span>期刊/会议</span>
+                                <i class="fas fa-sort ml-1 text-xs"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer sort-button" data-sort="year">
+                            <div class="flex items-center">
+                                <span>年份</span>
+                                <i class="fas fa-sort ml-1 text-xs"></i>
+                            </div>
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">操作</th>
+                    </tr>
+                </thead>
+                <tbody id="publications-tbody" class="bg-white divide-y divide-gray-200">
+                    {% for pub in site.data.publications.main %}
+                    <tr class="table-row-hover publication-row" 
+                        data-id="{{ forloop.index }}"
+                        data-title="{{ pub.title | escape | replace: '"', '&quot;' }}"
+                        data-authors="{{ pub.authors | escape | replace: '"', '&quot;' }}"
+                        data-journal="{{ pub.conference | escape | replace: '"', '&quot;' }}"
+                        data-year="{{ pub.year | default: 0 }}"
+                        data-type="{{ pub.type | default: '' }}"
+                        data-topic="{{ pub.topic | default: '' }}"
+                        data-pdf="{{ pub.pdf | default: '' }}"
+                        data-conference-short="{{ pub.conference_short | default: '' }}">
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm font-medium text-primary hover:text-secondary cursor-pointer">
+                                {% if pub.pdf %}
+                                <a href="{{ pub.pdf }}" target="_blank">{{ pub.title }}</a>
+                                {% else %}
+                                {{ pub.title }}
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                            {{ pub.authors }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                            {{ pub.conference_short | default: pub.conference }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">
+                            {{ pub.year }}
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            {% if pub.pdf %}
+                            <a href="{{ pub.pdf }}" target="_blank" class="text-primary hover:text-secondary">
+                                <i class="fas fa-eye mr-1"></i>查看详情
+                            </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- 分页区域 -->
+<section id="pagination" class="flex items-center justify-between">
+    <div class="text-sm text-text-secondary">
+        显示第 <span id="start-index">1</span> - <span id="end-index">{{ site.data.publications.main.size }}</span> 条，共 <span id="total-items">{{ site.data.publications.main.size }}</span> 条
+    </div>
+    <div class="flex items-center space-x-2">
+        <button id="prev-page" class="px-3 py-1 border border-gray-300 rounded text-sm pagination-hover" disabled>
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div id="page-numbers" class="flex space-x-1">
+            <!-- 页码按钮将通过JavaScript动态生成 -->
+        </div>
+        <button id="next-page" class="px-3 py-1 border border-gray-300 rounded text-sm pagination-hover">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</section>
+

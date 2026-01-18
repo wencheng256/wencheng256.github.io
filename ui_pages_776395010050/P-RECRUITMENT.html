@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>招生信息 - 研途科研主页</title>
+    <script src="https://unpkg.byted-static.com/coze/space_ppt_lib/1.0.3-alpha.12/lib/tailwindcss.js"></script>
+    <script src="https://unpkg.byted-static.com/fortawesome/fontawesome-free/6.7.2/js/all.min.js" data-auto-replace-svg="nest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        tertiary: '#3b82f6',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#06b6d4',
+                        'text-primary': '#1f2937',
+                        'text-secondary': '#6b7280',
+                        'bg-light': '#f8fafc',
+                        'border-light': '#e5e7eb'
+                    },
+                    boxShadow: {
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'elevated': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-collapsed {
+            width: 56px;
+        }
+        
+        .sidebar-expanded {
+            width: 240px;
+        }
+        
+        .main-content-expanded {
+            margin-left: 240px;
+        }
+        
+        .main-content-collapsed {
+            margin-left: 56px;
+        }
+        
+        .nav-item-active {
+            background-color: #dbeafe;
+            color: #2563eb;
+            border-right: 3px solid #2563eb;
+        }
+        
+        .nav-item-hover:hover {
+            background-color: #f3f4f6;
+            color: #2563eb;
+        }
+        
+        .search-focus:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .recruitment-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .recruitment-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .requirement-item {
+            border-left: 3px solid #2563eb;
+            background-color: #f8fafc;
+            transition: all 0.3s ease;
+        }
+        
+        .requirement-item:hover {
+            background-color: #dbeafe;
+            border-left-color: #1e40af;
+        }
+        
+        .contact-link:hover {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+        
+        .year-tab {
+            transition: all 0.3s ease;
+        }
+        
+        .year-tab.active {
+            background-color: #2563eb;
+            color: white;
+        }
+        
+        .year-tab:not(.active):hover {
+            background-color: #f3f4f6;
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body class="bg-bg-light min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header id="top-navbar" class="fixed top-0 left-0 right-0 bg-white border-b border-border-light h-16 z-50">
+        <div class="flex items-center justify-between h-full px-6">
+            <!-- 左侧：Logo和菜单切换 -->
+            <div class="flex items-center space-x-4">
+                <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 lg:hidden">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-text-primary">研途</h1>
+                </div>
+            </div>
+            
+            <!-- 中间：主导航菜单 -->
+            <nav id="main-nav" class="hidden lg:flex items-center space-x-8">
+                <a href="P-HOME.html" class="text-text-secondary hover:text-primary py-1 transition-colors">首页</a>
+                <a href="P-PUBLICATIONS.html" class="text-text-secondary hover:text-primary py-1 transition-colors">论文发表</a>
+                <a href="P-NEWS.html" class="text-text-secondary hover:text-primary py-1 transition-colors">学术动态</a>
+                <a href="P-RECRUITMENT.html" class="text-primary font-medium border-b-2 border-primary py-1">招生信息</a>
+                <a href="P-INDUSTRY_COOPERATION.html" class="text-text-secondary hover:text-primary py-1 transition-colors">产学研合作</a>
+                <a href="P-CONTACT.html" class="text-text-secondary hover:text-primary py-1 transition-colors">联系与互动</a>
+            </nav>
+            
+            <!-- 右侧：搜索和语言切换 -->
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" id="global-search" placeholder="搜索内容..." 
+                           class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg search-focus">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <select id="language-selector" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                    <option value="zh-CN">简体中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- 左侧菜单 -->
+    <aside id="sidebar" class="fixed left-0 top-16 bottom-0 bg-white border-r border-border-light sidebar-expanded transition-all duration-300 z-40">
+        <div class="p-4">
+            <nav class="space-y-2">
+                <a href="P-HOME.html" id="nav-home" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-home text-lg w-5"></i>
+                    <span class="sidebar-text">首页</span>
+                </a>
+                <a href="P-PUBLICATIONS.html" id="nav-publications" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-file-alt text-lg w-5"></i>
+                    <span class="sidebar-text">论文发表</span>
+                </a>
+                <a href="P-NEWS.html" id="nav-news" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-newspaper text-lg w-5"></i>
+                    <span class="sidebar-text">学术动态</span>
+                </a>
+                <a href="P-RECRUITMENT.html" id="nav-recruitment" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-active">
+                    <i class="fas fa-user-plus text-lg w-5"></i>
+                    <span class="sidebar-text">招生信息</span>
+                </a>
+                <a href="P-INDUSTRY_COOPERATION.html" id="nav-cooperation" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-handshake text-lg w-5"></i>
+                    <span class="sidebar-text">产学研合作</span>
+                </a>
+                <a href="P-CONTACT.html" id="nav-contact" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-envelope text-lg w-5"></i>
+                    <span class="sidebar-text">联系与互动</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main id="main-content" class="main-content-expanded pt-16 min-h-screen transition-all duration-300">
+        <div class="p-6 max-w-7xl mx-auto">
+            <!-- 页面头部 -->
+            <section id="page-header" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h1 class="text-3xl font-bold text-text-primary mb-2">招生信息</h1>
+                            <nav class="text-sm text-text-secondary">
+                                <a href="P-HOME.html" class="hover:text-primary">首页</a>
+                                <span class="mx-2">/</span>
+                                <span class="text-primary">招生信息</span>
+                            </nav>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-text-secondary mb-1">最新更新</p>
+                            <p class="text-lg font-medium text-text-primary">2024年9月</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 招生计划区 -->
+            <section id="recruitment-plan" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-6 flex items-center">
+                        <i class="fas fa-chart-line text-primary mr-2"></i>
+                        招生计划
+                    </h2>
+                    
+                    <!-- 年份切换标签 -->
+                    <div class="flex space-x-2 mb-6">
+                        <button class="year-tab active px-4 py-2 rounded-lg text-sm font-medium" data-year="2024">
+                            2024年
+                        </button>
+                        <button class="year-tab px-4 py-2 rounded-lg text-sm font-medium" data-year="2025">
+                            2025年（预告）
+                        </button>
+                    </div>
+                    
+                    <!-- 2024年招生计划 -->
+                    <div id="plan-2024" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="recruitment-card rounded-xl p-6">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-user-graduate text-primary text-xl mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-text-primary">硕士研究生</h3>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">招生名额：</span>
+                                        <span class="font-medium text-text-primary">8-10名</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">招生类型：</span>
+                                        <span class="font-medium text-text-primary">统考、推免</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">研究方向：</span>
+                                        <span class="font-medium text-text-primary">人工智能、机器学习</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="recruitment-card rounded-xl p-6">
+                                <div class="flex items-center mb-4">
+                                    <i class="fas fa-user-tie text-primary text-xl mr-3"></i>
+                                    <h3 class="text-lg font-semibold text-text-primary">博士研究生</h3>
+                                </div>
+                                <div class="space-y-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">招生名额：</span>
+                                        <span class="font-medium text-text-primary">2-3名</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">招生类型：</span>
+                                        <span class="font-medium text-text-primary">申请-考核制</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">研究方向：</span>
+                                        <span class="font-medium text-text-primary">深度学习、计算机视觉</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 rounded-xl p-4 border-l-4 border-primary">
+                            <div class="flex items-start">
+                                <i class="fas fa-info-circle text-primary mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium text-text-primary mb-1">招生说明</h4>
+                                    <p class="text-sm text-text-secondary">
+                                        欢迎对人工智能、机器学习、深度学习等领域有浓厚兴趣的优秀学生报考。我们提供充足的科研经费、良好的学术氛围和国际化的交流机会。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 2025年招生计划（预告） -->
+                    <div id="plan-2025" class="space-y-6 hidden">
+                        <div class="bg-gray-50 rounded-xl p-8 text-center">
+                            <i class="fas fa-clock text-gray-400 text-4xl mb-4"></i>
+                            <h3 class="text-lg font-semibold text-text-primary mb-2">2025年招生计划预告</h3>
+                            <p class="text-text-secondary">
+                                2025年招生计划将于2024年12月公布，敬请关注。预计招生名额与研究方向将保持稳定。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 报考要求区 -->
+            <section id="application-requirements" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-6 flex items-center">
+                        <i class="fas fa-list-check text-primary mr-2"></i>
+                        报考要求
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-lg font-medium text-text-primary mb-4">申请条件</h3>
+                            <div class="space-y-3">
+                                <div class="requirement-item pl-4 py-3 rounded-r-lg">
+                                    <h4 class="font-medium text-text-primary mb-1">基本条件</h4>
+                                    <p class="text-sm text-text-secondary">
+                                        拥护中国共产党的领导，品德良好，遵纪守法，身体健康状况符合国家和学校规定的体检要求。
+                                    </p>
+                                </div>
+                                <div class="requirement-item pl-4 py-3 rounded-r-lg">
+                                    <h4 class="font-medium text-text-primary mb-1">学历要求</h4>
+                                    <p class="text-sm text-text-secondary">
+                                        硕士研究生：具有国家承认的大学本科毕业学历；博士研究生：具有硕士学位或同等学历。
+                                    </p>
+                                </div>
+                                <div class="requirement-item pl-4 py-3 rounded-r-lg">
+                                    <h4 class="font-medium text-text-primary mb-1">英语水平</h4>
+                                    <p class="text-sm text-text-secondary">
+                                        硕士：CET-6 ≥ 425分或雅思 ≥ 6.0或托福 ≥ 80分；博士：CET-6 ≥ 450分或雅思 ≥ 6.5或托福 ≥ 90分。
+                                    </p>
+                                </div>
+                                <div class="requirement-item pl-4 py-3 rounded-r-lg">
+                                    <h4 class="font-medium text-text-primary mb-1">科研能力</h4>
+                                    <p class="text-sm text-text-secondary">
+                                        具有较强的科研潜力和创新能力，有相关领域研究经验或论文发表者优先考虑。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-text-primary mb-4">所需材料</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-2">基本材料</h4>
+                                    <ul class="space-y-1 text-sm text-text-secondary">
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2 text-xs"></i>
+                                            申请表
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2 text-xs"></i>
+                                            个人简历
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2 text-xs"></i>
+                                            成绩单
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2 text-xs"></i>
+                                            推荐信（2封）
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-2">补充材料</h4>
+                                    <ul class="space-y-1 text-sm text-text-secondary">
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2 text-xs"></i>
+                                            英语成绩证明
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2 text-xs"></i>
+                                            科研成果证明
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2 text-xs"></i>
+                                            研究计划书
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2 text-xs"></i>
+                                            获奖证书
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-text-primary mb-4">申请流程</h3>
+                            <div class="relative">
+                                <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-primary"></div>
+                                <div class="space-y-6">
+                                    <div class="relative flex items-start">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-medium">1</div>
+                                        <div class="ml-4 flex-1">
+                                            <h4 class="font-medium text-text-primary">在线申请</h4>
+                                            <p class="text-sm text-text-secondary">通过学校研究生招生系统提交申请材料</p>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-medium">2</div>
+                                        <div class="ml-4 flex-1">
+                                            <h4 class="font-medium text-text-primary">材料审核</h4>
+                                            <p class="text-sm text-text-secondary">审核申请材料，确定进入复试名单</p>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-medium">3</div>
+                                        <div class="ml-4 flex-1">
+                                            <h4 class="font-medium text-text-primary">复试考核</h4>
+                                            <p class="text-sm text-text-secondary">专业面试、英语测试、科研能力评估</p>
+                                        </div>
+                                    </div>
+                                    <div class="relative flex items-start">
+                                        <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm font-medium">4</div>
+                                        <div class="ml-4 flex-1">
+                                            <h4 class="font-medium text-text-primary">录取通知</h4>
+                                            <p class="text-sm text-text-secondary">公布录取结果，发放录取通知书</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 培养方案区 -->
+            <section id="training-program" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap text-primary mr-2"></i>
+                        培养方案
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-medium text-text-primary mb-4">课程设置</h3>
+                            <div class="space-y-4">
+                                <div class="recruitment-card rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-2">硕士研究生</h4>
+                                    <ul class="space-y-1 text-sm text-text-secondary">
+                                        <li class="flex justify-between">
+                                            <span>机器学习基础</span>
+                                            <span class="text-primary">必修</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>深度学习原理</span>
+                                            <span class="text-primary">必修</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>数据结构与算法</span>
+                                            <span class="text-primary">必修</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>自然语言处理</span>
+                                            <span class="text-secondary">选修</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>计算机视觉</span>
+                                            <span class="text-secondary">选修</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="recruitment-card rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-2">博士研究生</h4>
+                                    <ul class="space-y-1 text-sm text-text-secondary">
+                                        <li class="flex justify-between">
+                                            <span>高级机器学习</span>
+                                            <span class="text-primary">必修</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>神经网络理论</span>
+                                            <span class="text-primary">必修</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>科研方法论</span>
+                                            <span class="text-primary">必修</span>
+                                        </li>
+                                        <li class="flex justify-between">
+                                            <span>学术前沿讲座</span>
+                                            <span class="text-secondary">选修</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-text-primary mb-4">科研要求</h3>
+                            <div class="space-y-4">
+                                <div class="recruitment-card rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-2">硕士研究生</h4>
+                                    <ul class="space-y-2 text-sm text-text-secondary">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-primary text-xs mt-1.5 mr-2"></i>
+                                            <span>参与至少1个科研项目</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-primary text-xs mt-1.5 mr-2"></i>
+                                            <span>完成高质量的硕士学位论文</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-primary text-xs mt-1.5 mr-2"></i>
+                                            <span>鼓励在学术会议或期刊发表论文</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-primary text-xs mt-1.5 mr-2"></i>
+                                            <span>掌握至少一种深度学习框架</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="recruitment-card rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-2">博士研究生</h4>
+                                    <ul class="space-y-2 text-sm text-text-secondary">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-primary text-xs mt-1.5 mr-2"></i>
+                                            <span>主持或作为核心成员参与科研项目</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-primary text-xs mt-1.5 mr-2"></i>
+                                            <span>在高水平期刊发表至少2篇论文</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-primary text-xs mt-1.5 mr-2"></i>
+                                            <span>完成具有创新性的博士学位论文</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-circle text-primary text-xs mt-1.5 mr-2"></i>
+                                            <span>参与学术会议并做报告</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-blue-50 rounded-xl p-4">
+                        <h3 class="font-medium text-text-primary mb-2">导师指导方式</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                            <div class="text-center">
+                                <i class="fas fa-users text-primary text-xl mb-2"></i>
+                                <h4 class="font-medium text-text-primary mb-1">团队合作</h4>
+                                <p class="text-text-secondary">定期团队会议，共同讨论研究进展</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-comments text-primary text-xl mb-2"></i>
+                                <h4 class="font-medium text-text-primary mb-1">定期指导</h4>
+                                <p class="text-text-secondary">每周1-2次单独指导，及时解决问题</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fas fa-globe text-primary text-xl mb-2"></i>
+                                <h4 class="font-medium text-text-primary mb-1">国际交流</h4>
+                                <p class="text-text-secondary">支持参加国际会议和学术交流</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 招生咨询联系方式区 -->
+            <section id="contact-information" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-6 flex items-center">
+                        <i class="fas fa-phone text-primary mr-2"></i>
+                        招生咨询
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-medium text-text-primary mb-4">联系方式</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex-shrink-0 w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-envelope text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-text-primary mb-1">邮箱咨询</h4>
+                                        <a href="mailto:zhang@university.edu.cn" id="contact-email" 
+                                           class="contact-link text-primary hover:text-secondary">
+                                            zhang@university.edu.cn
+                                        </a>
+                                        <p class="text-sm text-text-secondary mt-1">24小时内回复</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex-shrink-0 w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-phone text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-text-primary mb-1">电话咨询</h4>
+                                        <a href="tel:+86-10-12345678" id="contact-phone" 
+                                           class="contact-link text-primary hover:text-secondary">
+                                            +86-10-12345678
+                                        </a>
+                                        <p class="text-sm text-text-secondary mt-1">工作日 9:00-17:00</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex-shrink-0 w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                        <i class="fas fa-map-marker-alt text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-text-primary mb-1">办公地址</h4>
+                                        <p class="text-text-secondary">
+                                            北京市海淀区xxx路xxx号<br>
+                                            计算机科学与技术学院xxx室
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-medium text-text-primary mb-4">咨询流程</h3>
+                            <div class="space-y-4">
+                                <div class="recruitment-card rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-3">咨询时间</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex justify-between">
+                                            <span class="text-text-secondary">工作日：</span>
+                                            <span class="font-medium text-text-primary">9:00 - 12:00, 14:00 - 17:00</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-text-secondary">周末：</span>
+                                            <span class="font-medium text-text-primary">邮箱咨询</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-text-secondary">招生季：</span>
+                                            <span class="font-medium text-text-primary">延长至18:00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="recruitment-card rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-3">咨询方式</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2"></i>
+                                            <span class="text-text-secondary">邮箱咨询：详细描述问题，便于准确回复</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2"></i>
+                                            <span class="text-text-secondary">电话咨询：快速解答简单问题</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <i class="fas fa-check text-success mr-2"></i>
+                                            <span class="text-text-secondary">预约面谈：复杂问题可预约当面交流</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 rounded-lg p-4">
+                                    <h4 class="font-medium text-text-primary mb-2">温馨提示</h4>
+                                    <p class="text-sm text-text-secondary">
+                                        建议优先通过邮箱咨询，我们会在24小时内给予详细回复。如需电话咨询，请在工作时间拨打。重要招生信息会在官网及时更新，请密切关注。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 快速联系按钮 -->
+                    <div class="mt-8 text-center">
+                        <a href="P-CONTACT.html" id="quick-contact-btn" 
+                           class="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-secondary transition-colors shadow-card hover:shadow-elevated">
+                            <i class="fas fa-comments mr-2"></i>
+                            立即咨询
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 侧边栏切换功能
+            const sidebarToggle = document.querySelector('#sidebar-toggle');
+            const sidebar = document.querySelector('#sidebar');
+            const mainContent = document.querySelector('#main-content');
+            const sidebarTexts = document.querySelectorAll('.sidebar-text');
+            
+            let sidebarCollapsed = false;
+            
+            sidebarToggle.addEventListener('click', () => {
+                sidebarCollapsed = !sidebarCollapsed;
+                
+                if (sidebarCollapsed) {
+                    sidebar.classList.remove('sidebar-expanded');
+                    sidebar.classList.add('sidebar-collapsed');
+                    mainContent.classList.remove('main-content-expanded');
+                    mainContent.classList.add('main-content-collapsed');
+                    sidebarTexts.forEach(text => text.style.display = 'none');
+                } else {
+                    sidebar.classList.remove('sidebar-collapsed');
+                    sidebar.classList.add('sidebar-expanded');
+                    mainContent.classList.remove('main-content-collapsed');
+                    mainContent.classList.add('main-content-expanded');
+                    sidebarTexts.forEach(text => text.style.display = 'block');
+                }
+            });
+            
+            // 响应式处理
+            function handleResize() {
+                if (window.innerWidth < 1024) {
+                    sidebar.style.transform = sidebarCollapsed ? 'translateX(0)' : 'translateX(-100%)';
+                    mainContent.style.marginLeft = '0';
+                } else {
+                    sidebar.style.transform = 'translateX(0)';
+                    if (sidebarCollapsed) {
+                        mainContent.classList.remove('main-content-expanded');
+                        mainContent.classList.add('main-content-collapsed');
+                    } else {
+                        mainContent.classList.remove('main-content-collapsed');
+                        mainContent.classList.add('main-content-expanded');
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', handleResize);
+            handleResize(); // 初始化
+            
+            // 搜索功能
+            const globalSearch = document.querySelector('#global-search');
+            globalSearch.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const keyword = e.target.value.trim();
+                    if (keyword) {
+                        window.location.href = `P-PUBLICATIONS.html?search=${encodeURIComponent(keyword)}`;
+                    }
+                }
+            });
+            
+            // 语言切换功能
+            const languageSelector = document.querySelector('#language-selector');
+            languageSelector.addEventListener('change', (e) => {
+                const lang = e.target.value;
+                console.log('切换语言到:', lang);
+            });
+            
+            // 年份切换功能
+            const yearTabs = document.querySelectorAll('.year-tab');
+            const plan2024 = document.querySelector('#plan-2024');
+            const plan2025 = document.querySelector('#plan-2025');
+            
+            yearTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // 移除所有active类
+                    yearTabs.forEach(t => t.classList.remove('active'));
+                    // 添加active类到当前标签
+                    tab.classList.add('active');
+                    
+                    // 隐藏所有计划内容
+                    plan2024.classList.add('hidden');
+                    plan2025.classList.add('hidden');
+                    
+                    // 显示对应年份的计划
+                    const year = tab.dataset.year;
+                    if (year === '2024') {
+                        plan2024.classList.remove('hidden');
+                    } else if (year === '2025') {
+                        plan2025.classList.remove('hidden');
+                    }
+                });
+            });
+            
+            // 导航链接点击事件
+            document.querySelector('#nav-home').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+            
+            document.querySelector('#nav-publications').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+            
+            document.querySelector('#nav-news').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-NEWS.html';
+            });
+            
+            document.querySelector('#nav-cooperation').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-INDUSTRY_COOPERATION.html';
+            });
+            
+            document.querySelector('#nav-contact').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-CONTACT.html';
+            });
+            
+            // 顶部导航链接点击事件
+            document.querySelector('#main-nav a[href="P-HOME.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+            
+            document.querySelector('#main-nav a[href="P-PUBLICATIONS.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+            
+            document.querySelector('#main-nav a[href="P-NEWS.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-NEWS.html';
+            });
+            
+            document.querySelector('#main-nav a[href="P-INDUSTRY_COOPERATION.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-INDUSTRY_COOPERATION.html';
+            });
+            
+            document.querySelector('#main-nav a[href="P-CONTACT.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-CONTACT.html';
+            });
+            
+            // 面包屑导航
+            document.querySelector('#page-header a[href="P-HOME.html"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+            
+            // 联系方式点击事件
+            document.querySelector('#contact-email').addEventListener('click', function(e) {
+                console.log('打开邮件客户端');
+            });
+            
+            document.querySelector('#contact-phone').addEventListener('click', function(e) {
+                console.log('拨打电话');
+            });
+            
+            // 快速联系按钮
+            document.querySelector('#quick-contact-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-CONTACT.html';
+            });
+        });
+    </script>
+</body>
+</html>

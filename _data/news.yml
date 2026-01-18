@@ -1,0 +1,81 @@
+main:
+  - id: 1
+    title: "One paper accepted to T-PAMI (IF:23.6)"
+    content: "我们的一篇论文被 IEEE Transactions on Pattern Analysis and Machine Intelligence 接收。"
+    date: "2025-07"
+    category: "research"
+    category_label: "研究"
+    link: "/publications.html"
+  
+  - id: 2
+    title: "Two papers accepted to ICCV 2025"
+    content: "我们有两篇论文被 ICCV 2025 接收。"
+    date: "2025-06"
+    category: "conference"
+    category_label: "会议"
+    link: "/publications.html"
+  
+  - id: 3
+    title: "One paper accepted to ACL 2025"
+    content: "我们的一篇论文被 ACL 2025 接收。"
+    date: "2025-06"
+    category: "conference"
+    category_label: "会议"
+    link: "/publications.html"
+  
+  - id: 4
+    title: "One paper accepted to T-MI (IF:10.6)"
+    content: "我们的一篇论文被 IEEE Transactions on Medical Imaging 接收。"
+    date: "2025-03"
+    category: "research"
+    category_label: "研究"
+    link: "/publications.html"
+  
+  - id: 5
+    title: "Two papers accepted to CVPR 2025"
+    content: "我们有两篇论文被 CVPR 2025 接收。"
+    date: "2025-03"
+    category: "conference"
+    category_label: "会议"
+    link: "/publications.html"
+  
+  - id: 6
+    title: "Two papers accepted to AAAI 2025"
+    content: "我们有两篇论文被 AAAI 2025 接收。"
+    date: "2024-12"
+    category: "conference"
+    category_label: "会议"
+    link: "/publications.html"
+  
+  - id: 7
+    title: "One paper accepted to T-PAMI (IF:23.6)"
+    content: "我们的一篇论文被 IEEE Transactions on Pattern Analysis and Machine Intelligence 接收。"
+    date: "2024-09"
+    category: "research"
+    category_label: "研究"
+    link: "/publications.html"
+  
+  - id: 8
+    title: "One paper accepted to ACM MM 2024"
+    content: "我们的一篇论文被 ACM Multimedia 2024 接收。"
+    date: "2024-07"
+    category: "conference"
+    category_label: "会议"
+    link: "/publications.html"
+  
+  - id: 9
+    title: "Two papers accepted to ECCV 2024"
+    content: "我们有两篇论文被 ECCV 2024 接收。"
+    date: "2024-07"
+    category: "conference"
+    category_label: "会议"
+    link: "/publications.html"
+  
+  - id: 10
+    title: "One paper accepted to T-PAMI (IF:23.6)"
+    content: "我们的一篇论文被 IEEE Transactions on Pattern Analysis and Machine Intelligence 接收。"
+    date: "2024-04"
+    category: "research"
+    category_label: "研究"
+    link: "/publications.html"
+

@@ -1,0 +1,96 @@
+---
+layout: default
+---
+
+<!-- 页面头部 -->
+<section id="page-header" class="mb-6">
+    <div class="flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold text-text-primary mb-2">学术动态</h1>
+            <nav class="text-sm text-text-secondary">
+                <a href="{{ '/' | relative_url }}" class="hover:text-primary">首页</a>
+                <span class="mx-2">/</span>
+                <span class="text-text-primary">学术动态</span>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- 筛选工具栏 -->
+<section id="filter-toolbar" class="mb-6">
+    <div class="bg-white rounded-2xl shadow-card p-4">
+        <div class="flex flex-wrap items-center space-x-4">
+            <button class="filter-button px-4 py-2 rounded-lg text-sm font-medium filter-active" data-category="">
+                全部
+            </button>
+            <button class="filter-button px-4 py-2 rounded-lg text-sm font-medium filter-inactive" data-category="research">
+                研究
+            </button>
+            <button class="filter-button px-4 py-2 rounded-lg text-sm font-medium filter-inactive" data-category="conference">
+                会议
+            </button>
+            <button class="filter-button px-4 py-2 rounded-lg text-sm font-medium filter-inactive" data-category="award">
+                奖项
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- 新闻列表 -->
+<section id="news-list" class="mb-6">
+    <div class="space-y-6">
+        {% for news in site.data.news.main %}
+        <div class="news-card" data-category="{{ news.category | default: 'other' }}">
+            {% include news-card.html news=news %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- 分页区域 -->
+<section id="pagination" class="flex items-center justify-center">
+    <div class="flex items-center space-x-2">
+        <button class="px-3 py-1 border border-gray-300 rounded text-sm pagination-hover">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="flex space-x-1">
+            <button class="px-3 py-1 border border-gray-300 rounded text-sm pagination-active">1</button>
+            <button class="px-3 py-1 border border-gray-300 rounded text-sm pagination-hover">2</button>
+        </div>
+        <button class="px-3 py-1 border border-gray-300 rounded text-sm pagination-hover">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</section>
+
+<script>
+// 筛选功能
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const newsCards = document.querySelectorAll('.news-card');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.dataset.category;
+            
+            // 更新按钮状态
+            filterButtons.forEach(btn => {
+                btn.classList.remove('filter-active');
+                btn.classList.add('filter-inactive');
+            });
+            this.classList.remove('filter-inactive');
+            this.classList.add('filter-active');
+            
+            // 筛选新闻
+            newsCards.forEach(card => {
+                if (!category || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+

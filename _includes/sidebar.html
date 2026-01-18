@@ -1,0 +1,16 @@
+<!-- 左侧菜单 -->
+<aside id="sidebar" class="fixed left-0 top-16 bottom-0 bg-white border-r border-border-light sidebar-expanded transition-all duration-300 z-40">
+    <div class="p-4">
+        <nav class="space-y-2">
+            {% for item in site.data.navigation.main %}
+            <a href="{{ item.url | relative_url }}" 
+               id="nav-{{ item.id }}-sidebar" 
+               class="flex items-center space-x-3 px-3 py-2 rounded-lg {% if page.url == item.url %}nav-item-active{% else %}nav-item-hover{% endif %}">
+                <i class="{{ item.icon }} text-lg w-5"></i>
+                <span class="sidebar-text">{{ item.title }}</span>
+            </a>
+            {% endfor %}
+        </nav>
+    </div>
+</aside>
+

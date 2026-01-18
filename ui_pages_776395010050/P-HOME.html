@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研途 - 科研主页</title>
+    <script src="https://unpkg.byted-static.com/coze/space_ppt_lib/1.0.3-alpha.12/lib/tailwindcss.js"></script>
+    <script src="https://unpkg.byted-static.com/fortawesome/fontawesome-free/6.7.2/js/all.min.js" data-auto-replace-svg="nest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        tertiary: '#3b82f6',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b',
+                        info: '#06b6d4',
+                        'text-primary': '#1f2937',
+                        'text-secondary': '#6b7280',
+                        'bg-light': '#f8fafc',
+                        'border-light': '#e5e7eb'
+                    },
+                    boxShadow: {
+                        'card': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'elevated': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-collapsed {
+            width: 56px;
+        }
+        
+        .sidebar-expanded {
+            width: 240px;
+        }
+        
+        .main-content-expanded {
+            margin-left: 240px;
+        }
+        
+        .main-content-collapsed {
+            margin-left: 56px;
+        }
+        
+        .nav-item-active {
+            background-color: #dbeafe;
+            color: #2563eb;
+            border-right: 3px solid #2563eb;
+        }
+        
+        .nav-item-hover:hover {
+            background-color: #f3f4f6;
+            color: #2563eb;
+        }
+        
+        .card-hover:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-1px);
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .search-focus:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+        }
+        
+        .tech-tag {
+            background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+            border: 1px solid #81d4fa;
+            color: #0277bd;
+        }
+        
+        .honor-item {
+            border-left: 3px solid #2563eb;
+            background-color: #f8fafc;
+        }
+
+        .featured-paper-card {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .featured-paper-card:hover {
+            background-color: #f8fafc;
+            transform: translateX(4px);
+        }
+    </style>
+</head>
+<body class="bg-bg-light min-h-screen">
+    <!-- 顶部导航栏 -->
+    <header id="top-navbar" class="fixed top-0 left-0 right-0 bg-white border-b border-border-light h-16 z-50">
+        <div class="flex items-center justify-between h-full px-6">
+            <!-- 左侧：Logo和菜单切换 -->
+            <div class="flex items-center space-x-4">
+                <button id="sidebar-toggle" class="p-2 rounded-lg hover:bg-gray-100 lg:hidden">
+                    <i class="fas fa-bars text-gray-600"></i>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-text-primary">研途</h1>
+                </div>
+            </div>
+            
+            <!-- 中间：主导航菜单 -->
+            <nav id="main-nav" class="hidden lg:flex items-center space-x-8">
+                <a href="P-HOME.html" id="nav-home-main" class="text-primary font-medium border-b-2 border-primary py-1">首页</a>
+                <a href="P-PUBLICATIONS.html" id="nav-publications-main" class="text-text-secondary hover:text-primary py-1 transition-colors">论文发表</a>
+                <a href="P-NEWS.html" id="nav-news-main" class="text-text-secondary hover:text-primary py-1 transition-colors">学术动态</a>
+                <a href="P-RECRUITMENT.html" id="nav-recruitment-main" class="text-text-secondary hover:text-primary py-1 transition-colors">招生信息</a>
+                <a href="P-INDUSTRY_COOPERATION.html" id="nav-cooperation-main" class="text-text-secondary hover:text-primary py-1 transition-colors">产学研合作</a>
+                <a href="P-CONTACT.html" id="nav-contact-main" class="text-text-secondary hover:text-primary py-1 transition-colors">联系与互动</a>
+            </nav>
+            
+            <!-- 右侧：搜索和语言切换 -->
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" id="global-search" placeholder="搜索内容..." 
+                           class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg search-focus">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <select id="language-selector" class="px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                    <option value="zh-CN">简体中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- 左侧菜单 -->
+    <aside id="sidebar" class="fixed left-0 top-16 bottom-0 bg-white border-r border-border-light sidebar-expanded transition-all duration-300 z-40">
+        <div class="p-4">
+            <nav class="space-y-2">
+                <a href="P-HOME.html" id="nav-home-sidebar" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-active">
+                    <i class="fas fa-home text-lg w-5"></i>
+                    <span class="sidebar-text">首页</span>
+                </a>
+                <a href="P-PUBLICATIONS.html" id="nav-publications-sidebar" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-file-alt text-lg w-5"></i>
+                    <span class="sidebar-text">论文发表</span>
+                </a>
+                <a href="P-NEWS.html" id="nav-news-sidebar" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-newspaper text-lg w-5"></i>
+                    <span class="sidebar-text">学术动态</span>
+                </a>
+                <a href="P-RECRUITMENT.html" id="nav-recruitment-sidebar" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-user-plus text-lg w-5"></i>
+                    <span class="sidebar-text">招生信息</span>
+                </a>
+                <a href="P-INDUSTRY_COOPERATION.html" id="nav-cooperation-sidebar" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-handshake text-lg w-5"></i>
+                    <span class="sidebar-text">产学研合作</span>
+                </a>
+                <a href="P-CONTACT.html" id="nav-contact-sidebar" class="flex items-center space-x-3 px-3 py-2 rounded-lg nav-item-hover">
+                    <i class="fas fa-envelope text-lg w-5"></i>
+                    <span class="sidebar-text">联系与互动</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main id="main-content" class="main-content-expanded pt-16 min-h-screen transition-all duration-300">
+        <div class="p-6 max-w-7xl mx-auto">
+            <!-- 页面头部 -->
+            <section id="page-header" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-8">
+                    <div class="flex items-start space-x-6">
+                        <div class="flex-shrink-0">
+                            <img src="https://s.coze.cn/image/kN-fVWzI4FA/" 
+                                 alt="张教授头像，50岁左右男性，戴眼镜，学术气质" data-category="人物" 
+                                 class="w-24 h-24 rounded-full object-cover border-4 border-gray-100">
+                        </div>
+                        <div class="flex-1">
+                            <h1 class="text-3xl font-bold text-text-primary mb-2">张教授</h1>
+                            <p class="text-lg text-text-secondary mb-2">计算机科学与技术学院 · 教授 · 博士生导师</p>
+                            <p class="text-text-secondary">专注于人工智能、机器学习和数据挖掘领域的研究，在国际顶级期刊和会议上发表论文100余篇，主持国家级科研项目多项。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 个人简介区 -->
+            <section id="personal-intro" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-user text-primary mr-2"></i>
+                        个人简介
+                    </h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-medium text-text-primary mb-2">教育背景</h3>
+                            <p class="text-text-secondary">博士，清华大学计算机科学与技术系，2005年</p>
+                            <p class="text-text-secondary">硕士，北京大学信息科学技术学院，2002年</p>
+                            <p class="text-text-secondary">学士，复旦大学计算机科学系，1999年</p>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-text-primary mb-2">工作经历</h3>
+                            <p class="text-text-secondary">2010-至今：某知名大学计算机科学与技术学院，教授</p>
+                            <p class="text-text-secondary">2007-2010：某知名大学计算机科学与技术学院，副教授</p>
+                            <p class="text-text-secondary">2005-2007：某知名大学计算机科学与技术学院，讲师</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 精选论文区 -->
+            <section id="featured-papers" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-text-primary flex items-center">
+                            <i class="fas fa-star text-primary mr-2"></i>
+                            精选论文
+                        </h2>
+                        <a href="P-PUBLICATIONS.html" id="view-all-papers" class="text-primary hover:text-secondary text-sm font-medium">
+                            查看全部 <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-primary pl-4 py-2 featured-paper-card rounded-r-lg" data-paper-id="pub1">
+                            <h3 class="font-medium text-text-primary mb-1">Deep Learning Approaches for Image Recognition: A Comprehensive Survey</h3>
+                            <p class="text-sm text-text-secondary mb-1">Zhang, L., Wang, M., Li, S.</p>
+                            <p class="text-sm text-text-secondary">IEEE Transactions on Pattern Analysis and Machine Intelligence, 2023</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4 py-2 featured-paper-card rounded-r-lg" data-paper-id="pub2">
+                            <h3 class="font-medium text-text-primary mb-1">Machine Learning in Healthcare: Applications and Challenges</h3>
+                            <p class="text-sm text-text-secondary mb-1">Zhang, L., Chen, H., Liu, J.</p>
+                            <p class="text-sm text-text-secondary">Nature Medicine, 2022</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4 py-2 featured-paper-card rounded-r-lg" data-paper-id="pub3">
+                            <h3 class="font-medium text-text-primary mb-1">Neural Networks for Natural Language Processing</h3>
+                            <p class="text-sm text-text-secondary mb-1">Zhang, L., Zhao, Y., Sun, K.</p>
+                            <p class="text-sm text-text-secondary">ACM Computing Surveys, 2021</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 研究领域区 -->
+            <section id="research-areas" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-flask text-primary mr-2"></i>
+                        研究领域
+                    </h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-medium text-text-primary mb-3">主要研究方向</h3>
+                            <div class="tech-grid">
+                                <span class="tech-tag px-3 py-1 rounded-full text-sm font-medium">机器学习</span>
+                                <span class="tech-tag px-3 py-1 rounded-full text-sm font-medium">深度学习</span>
+                                <span class="tech-tag px-3 py-1 rounded-full text-sm font-medium">神经网络</span>
+                                <span class="tech-tag px-3 py-1 rounded-full text-sm font-medium">自然语言处理</span>
+                                <span class="tech-tag px-3 py-1 rounded-full text-sm font-medium">计算机视觉</span>
+                                <span class="tech-tag px-3 py-1 rounded-full text-sm font-medium">数据挖掘</span>
+                                <span class="tech-tag px-3 py-1 rounded-full text-sm font-medium">人工智能</span>
+                                <span class="tech-tag px-3 py-1 rounded-full text-sm font-medium">模式识别</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-text-primary mb-2">研究概述</h3>
+                            <p class="text-text-secondary">
+                                主要从事机器学习、深度学习和人工智能领域的基础理论与应用研究。近年来重点关注神经网络的可解释性、大规模预训练模型的优化方法，以及AI在医疗、教育、金融等领域的应用。研究工作致力于推动人工智能技术的创新发展和实际应用，为解决复杂的科学和工程问题提供智能化解决方案。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 学术荣誉区 -->
+            <section id="academic-honors" class="mb-8">
+                <div class="bg-white rounded-2xl shadow-card p-6">
+                    <h2 class="text-xl font-semibold text-text-primary mb-4 flex items-center">
+                        <i class="fas fa-trophy text-primary mr-2"></i>
+                        学术荣誉
+                    </h2>
+                    <div class="space-y-4">
+                        <div class="honor-item pl-4 py-3 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-1">国家杰出青年科学基金</h3>
+                                    <p class="text-sm text-text-secondary">国家自然科学基金委员会</p>
+                                </div>
+                                <span class="text-sm text-text-secondary font-medium">2023年</span>
+                            </div>
+                        </div>
+                        <div class="honor-item pl-4 py-3 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-1">IEEE Fellow</h3>
+                                    <p class="text-sm text-text-secondary">国际电气电子工程师学会</p>
+                                </div>
+                                <span class="text-sm text-text-secondary font-medium">2022年</span>
+                            </div>
+                        </div>
+                        <div class="honor-item pl-4 py-3 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-1">教育部自然科学一等奖</h3>
+                                    <p class="text-sm text-text-secondary">中华人民共和国教育部</p>
+                                </div>
+                                <span class="text-sm text-text-secondary font-medium">2021年</span>
+                            </div>
+                        </div>
+                        <div class="honor-item pl-4 py-3 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-1">长江学者奖励计划特聘教授</h3>
+                                    <p class="text-sm text-text-secondary">中华人民共和国教育部</p>
+                                </div>
+                                <span class="text-sm text-text-secondary font-medium">2020年</span>
+                            </div>
+                        </div>
+                        <div class="honor-item pl-4 py-3 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-text-primary mb-1">ACM杰出科学家</h3>
+                                    <p class="text-sm text-text-secondary">美国计算机协会</p>
+                                </div>
+                                <span class="text-sm text-text-secondary font-medium">2019年</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 侧边栏切换功能
+            const sidebarToggle = document.querySelector('#sidebar-toggle');
+            const sidebar = document.querySelector('#sidebar');
+            const mainContent = document.querySelector('#main-content');
+            const sidebarTexts = document.querySelectorAll('.sidebar-text');
+            
+            let sidebarCollapsed = false;
+            
+            sidebarToggle.addEventListener('click', function() {
+                sidebarCollapsed = !sidebarCollapsed;
+                
+                if (sidebarCollapsed) {
+                    sidebar.classList.remove('sidebar-expanded');
+                    sidebar.classList.add('sidebar-collapsed');
+                    mainContent.classList.remove('main-content-expanded');
+                    mainContent.classList.add('main-content-collapsed');
+                    sidebarTexts.forEach(text => text.style.display = 'none');
+                } else {
+                    sidebar.classList.remove('sidebar-collapsed');
+                    sidebar.classList.add('sidebar-expanded');
+                    mainContent.classList.remove('main-content-collapsed');
+                    mainContent.classList.add('main-content-expanded');
+                    sidebarTexts.forEach(text => text.style.display = 'block');
+                }
+            });
+            
+            // 响应式处理
+            function handleResize() {
+                if (window.innerWidth < 1024) {
+                    sidebar.style.transform = sidebarCollapsed ? 'translateX(0)' : 'translateX(-100%)';
+                    mainContent.style.marginLeft = '0';
+                } else {
+                    sidebar.style.transform = 'translateX(0)';
+                    if (sidebarCollapsed) {
+                        mainContent.classList.remove('main-content-expanded');
+                        mainContent.classList.add('main-content-collapsed');
+                    } else {
+                        mainContent.classList.remove('main-content-collapsed');
+                        mainContent.classList.add('main-content-expanded');
+                    }
+                }
+            }
+            
+            window.addEventListener('resize', handleResize);
+            handleResize(); // 初始化
+            
+            // 搜索功能
+            const globalSearch = document.querySelector('#global-search');
+            globalSearch.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const keyword = e.target.value.trim();
+                    if (keyword) {
+                        window.location.href = `P-PUBLICATIONS.html?search=${encodeURIComponent(keyword)}`;
+                    }
+                }
+            });
+            
+            // 语言切换功能
+            const languageSelector = document.querySelector('#language-selector');
+            languageSelector.addEventListener('change', function(e) {
+                const lang = e.target.value;
+                // 这里可以添加语言切换逻辑
+                console.log('切换语言到:', lang);
+                // 实际应用中，这里会重新加载页面内容
+                window.location.href = `P-HOME.html?lang=${lang}`;
+            });
+            
+            // 精选论文点击事件
+            const featuredPapers = document.querySelectorAll('.featured-paper-card');
+            featuredPapers.forEach(paper => {
+                paper.addEventListener('click', function() {
+                    const paperId = this.dataset.paperId;
+                    window.location.href = `P-PUBLICATION_DETAIL.html?id=${paperId}`;
+                });
+            });
+            
+            // 查看全部论文链接
+            const viewAllPapers = document.querySelector('#view-all-papers');
+            viewAllPapers.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+            
+            // 顶部导航菜单点击事件
+            document.querySelector('#nav-home-main').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+            
+            document.querySelector('#nav-publications-main').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+            
+            document.querySelector('#nav-news-main').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-NEWS.html';
+            });
+            
+            document.querySelector('#nav-recruitment-main').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-RECRUITMENT.html';
+            });
+            
+            document.querySelector('#nav-cooperation-main').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-INDUSTRY_COOPERATION.html';
+            });
+            
+            document.querySelector('#nav-contact-main').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-CONTACT.html';
+            });
+            
+            // 左侧菜单点击事件
+            document.querySelector('#nav-home-sidebar').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-HOME.html';
+            });
+            
+            document.querySelector('#nav-publications-sidebar').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-PUBLICATIONS.html';
+            });
+            
+            document.querySelector('#nav-news-sidebar').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-NEWS.html';
+            });
+            
+            document.querySelector('#nav-recruitment-sidebar').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-RECRUITMENT.html';
+            });
+            
+            document.querySelector('#nav-cooperation-sidebar').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-INDUSTRY_COOPERATION.html';
+            });
+            
+            document.querySelector('#nav-contact-sidebar').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = 'P-CONTACT.html';
+            });
+        });
+    </script>
+</body>
+</html>
