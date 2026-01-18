@@ -1,7 +1,7 @@
 ---
 layout: home
-title: Home
-description: "专注于人工智能、机器学习和数据挖掘领域的研究，在国际顶级期刊和会议上发表论文100余篇，主持国家级科研项目多项。"
+title: 韩文程/Wencheng Han
+description: "专注于计算机视觉、自动驾驶感知和医学AI领域的研究，在国际顶级期刊和会议上发表多篇论文。"
 research_areas:
   - "机器学习"
   - "深度学习"
