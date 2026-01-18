@@ -16,10 +16,14 @@ layout: default
             <div class="flex-1">
                 <h1 class="text-3xl font-bold text-text-primary mb-2">{{ site.title }}</h1>
                 {% if site.position %}
-                <p class="text-lg text-text-secondary mb-2">{{ site.position }}</p>
+                <p class="text-lg text-text-secondary mb-2">
+                    {% if site.position_zh %}{{ site.position_zh }} / {% endif %}{{ site.position }}
+                </p>
                 {% endif %}
                 {% if site.affiliation %}
-                <p class="text-text-secondary mb-2">{{ site.affiliation }}</p>
+                <p class="text-text-secondary mb-2">
+                    {% if site.affiliation_zh %}{{ site.affiliation_zh }} / {% endif %}{{ site.affiliation }}
+                </p>
                 {% endif %}
                 {% if page.description %}
                 <p class="text-text-secondary">{{ page.description }}</p>
