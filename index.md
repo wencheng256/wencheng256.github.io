@@ -38,7 +38,7 @@ honors:
     year: "2019"
 ---
 
-Hello and welcome! I am Wencheng Han, a postdoctoral fellow at the State Key Laboratory of Internet of Things for Smart City (SKL-IOTSC), University of Macau. I recently completed my Ph.D. in June 2025 under the supervision of Prof. Jianbing Shen.
+Hello and welcome! I am **韩文程 (Wencheng Han)**, a postdoctoral fellow at the State Key Laboratory of Internet of Things for Smart City (SKL-IOTSC), University of Macau. I recently completed my Ph.D. in June 2025 under the supervision of Prof. Jianbing Shen.
 
 My academic journey began with a bachelor's degree from Shandong University (2012–2016), followed by a master's degree at Beijing Institute of Technology (2019–2022). I completed my Ph.D. in just three years, focusing on computer vision and autonomous driving.
 
