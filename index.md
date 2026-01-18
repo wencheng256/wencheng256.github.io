@@ -2,6 +2,8 @@
 layout: home
 title: 韩文程  Wencheng Han
 description: "韩文程 (Wencheng Han) - 澳门大学物联网智慧城市国家重点实验室博士后研究员。主要研究领域包括：自动驾驶、机器人控制、计算机医学和AIGC。"
+latest_news: "将于2026年入职山东大学控制科学与工程学院，海优，正教授，博士生导师。长期招收硕士生、博士生、博士后和科研助理，欢迎自荐或者推荐。"
+latest_news_en: "Will join the School of Control Science and Engineering, Shandong University in 2026 as a Professor (Overseas Excellent Young Scholar) and Ph.D. Supervisor. Currently recruiting Master's students, Ph.D. students, Postdocs, and Research Assistants. Self-recommendations and referrals are welcome."
 research_areas:
   - "自动驾驶"
   - "机器人控制"

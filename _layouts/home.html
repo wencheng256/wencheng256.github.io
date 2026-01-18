@@ -41,6 +41,32 @@ layout: default
     </div>
 </section>
 
+<!-- 最新消息区 -->
+{% if page.latest_news %}
+<section id="latest-news" class="mb-8">
+    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-card p-6 border-l-4 border-primary">
+        <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
+                    <i class="fas fa-bullhorn text-white text-lg"></i>
+                </div>
+            </div>
+            <div class="flex-1">
+                <h2 class="text-xl font-semibold text-text-primary mb-3 flex items-center">
+                    <span>最新消息 / Latest News</span>
+                </h2>
+                <div class="space-y-2">
+                    <p class="text-text-primary font-medium leading-relaxed">{{ page.latest_news }}</p>
+                    {% if page.latest_news_en %}
+                    <p class="text-text-secondary text-sm italic leading-relaxed">{{ page.latest_news_en }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
 <!-- 个人简介区 -->
 {% if page.show_intro != false %}
 <section id="personal-intro" class="mb-8">
